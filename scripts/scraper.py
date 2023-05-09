@@ -1,0 +1,44 @@
+import requests
+from bs4 import BeautifulSoup
+
+def scrapeTokopedia(name):
+    url = 'https://www.tokopedia.com/search?st=product&q='+name
+    headers= {
+
+    }
+    response = requests.get(url,headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    price_divs = soup.find_all('div', {'id': 'spnSRPProdPrice'})
+    #ini hanya dapet price, blm dapet nama, gambar(kalo perlu)
+
+def scrapeShopee(name):
+    url = 'https://shopee.co.id/search?keyword='+name
+    headers= {
+
+    }
+    response = requests.get(url,headers=headers)
+    return
+
+def scrapeLazada(name):
+    url = f'https://www.lazada.co.id/catalog/?q={name}&_keyori=ss'
+    headers= {
+
+    }
+    response = requests.get(url,headers=headers)
+    return
+
+
+
+def dailyScrape():
+    #Code here for getting data from the database, should be in a form of 1d array with inside of it is name
+
+    #end code
+    scrapelist =['bakso','kalkulator']#temp array
+    for i in scrapelist:
+        scrapeLazada(i)
+        scrapeShopee(i)
+        scrapeTokopedia(i)
+    return
+
+
+dailyScrape()

@@ -9,6 +9,9 @@ from sklearn.linear_model import LinearRegression
 
 
 #note, need future integration. however pretty much done for the linear regression. just need array of 2d size.
+#doesnt truly predict next day, just the latest data date +1. idk the format for incoming data date, so hold on for now
+#also, doesnt have any model accuracy evaluation, might need it someday.
+#the prediction should only be coming out positive, since there is no negative price. so negative price will be used as a return error.
 def lin_reg(data):
 
     if not data:

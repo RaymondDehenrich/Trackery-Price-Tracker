@@ -92,6 +92,7 @@ def dailyScrape():
         lazada_list=scrapeLazada(i)
         shopee_list=scrapeShopee(i)
         tokopedia_list=scrapeTokopedia(i)
+        #idk ini mau process lagi gmn, either cmn langsung taro average harga dlm database atau gmn.
     return
 
 dailyScrape()

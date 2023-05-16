@@ -32,7 +32,7 @@ def scrapeTokopedia(name):
     ]
     return data_list
 
-def scrapeShopee(name):#might be impossible??? idk sumpah keluar garbage value terus
+def scrapeShopee(name):#might be impossible??? idk sumpah redirect ke login terus
     url = 'https://shopee.co.id/search?keyword='+name
     headers = { 
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 

@@ -14,12 +14,11 @@
       src="https://kit.fontawesome.com/667e3552e6.js"
       crossorigin="anonymous"
     ></script>
-    <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet" />
     <title>Trackery</title>
   </head>
   <body>
-    {%include "navbar.html" %}
-    <div style="background-color:#1E1E1E" class="text-light container-fluid">{% block content %} {% endblock %}</div>
-    {%include "footer.html" %}
+    {% include "navbar.html" %}
+      {% block content %} {% endblock %}
+    {% include "footer.html" %}
   </body>
 </html>

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %} 
-<link href="{{url_for('static', filename='home.css')}}" rel="stylesheet" />
+<link href="{{url_for('static', filename='css/home.css')}}" rel="stylesheet" />
 <div class="home">
-  <img src="../static/Home-icon.png" class="background-image" />
+  <img src="{{url_for('static',filename='images/Home-icon.png')}}" class="background-image" />
   <div class="home-text">
     <p class="home-text-main">Welcome to Trackery</p>
     <p class="home-text-decs">A place to track your favorite item, compare it to other website and predict it's future price</p>
@@ -15,15 +15,4 @@
     </div>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-  $('#home-input').on('submit', function(event) {
-    var inputValue = $('input[name="home-search"]').val();
-    if (inputValue.trim() === '') {
-      event.preventDefault();
-    }
-  });
-});
-</script>
 {% endblock %}

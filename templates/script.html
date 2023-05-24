@@ -2,12 +2,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- load the script used in navbar -->
+<!-- NEED TO CHANGE FOR GUEST OR LOGGED IN USER -->
+
 <script>
+  //drop down for guest, for changing with user, need to have if statement
     $(document).ready(function() {
         $('#profile-button').click(function() {
-            $('#dropdown-menu').toggle();
+            $('#dropdown-menu-guest').toggle();
         });
     });
+    //add for changing guest/user depen on logged in here
 </script>
 
 <!-- load script that is needed for specific page, ex home, login, etc -->
@@ -23,9 +27,9 @@
     });
     </script>
 {% elif page_name == "login" %}
-<script>
-
-</script>
+<script src="{{url_for('static',filename='js/login.js')}}"></script>
+{% elif page_name == "register" %}
+<script src="{{url_for('static',filename='js/register.js')}}"></script>
 {% endif %}
 
 <!-- load bootstrap script for every page -->

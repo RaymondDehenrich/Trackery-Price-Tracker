@@ -12,7 +12,15 @@ def login():
     page_name="login"
     return render_template('login.html',page_name=page_name)
 
-#Will need integration with user, for example, the link should be like /<username>/history, for now will be a temporary link route
+@app.route('/register', methods=['GET','POST'])
+def register():
+    page_name="register"
+    return render_template('register.html',page_name=page_name)
+
+#Note, Will also need a /logout route for logging out, i think a html page still needed? idk need further research.
+
+#Will need integration with user, for example, the link should be like /history/<username> or something like that
+#for this route will be a temporary link route
 @app.route('/history',methods=['GET'])
 def history():
     #added temporary list for history, should be integrated with database

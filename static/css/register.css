@@ -1,4 +1,4 @@
-.login-page{
+.register-page{
     height:100vh;
     width:100%;
     background-color:#111111;
@@ -27,48 +27,48 @@
     z-index: 1;
 }
 
-.login-box{
+.register-box{
     background-color: #212328;
     /* width:609px; */
     width: 500px;
-    height: 405px;
+    height: 613px;
     border-top: 4px solid #5865F2;
     border-radius: 5px;
     top:40%;
 }
 
-.login-title{
+.register-title{
     position: absolute;
-    top:15%;
+    top:6%;
     color: white;
     transform: translate(-50%, -50%);
     left:50%;
     font-size: 20px;
 }
 
-.login-form{
+.register-form{
     position: absolute;
     /* padding-left:17%;
     padding-right: 17% ; */
-    top:51%;
+    top:48%;
     width:80%;
     height: 70%;
     transform: translate(-50%, -50%);
     left:50%;
 }
 
-.login-text-1{
+.register-text-1{
     position: absolute;
     color: white;
-    top:10%;
+    top:-1%;
 }
 
-.login-email{
+.register-email{
     width: 100%;
     height: 43px;
     position: absolute;
     color: white;
-    top:26%;
+    top:11%;
     transform: translate(-50%, -50%);
     left:50%;
     background-color: #3D414A;
@@ -77,23 +77,48 @@
     caret-color: white;
 }
 
-.login-email:focus{
+.register-email:focus{
     background-color: #3D414A;
     color: white;
 }
 
-.login-text-2{
+.register-text-2{
     position: absolute;
     color: white;
-    top:40%;
+    top:20%;
 }
 
-.login-password{
+.register-username{
     width: 100%;
     height: 43px;
     position: absolute;
     color: white;
-    top:56%;
+    top:32%;
+    transform: translate(-50%, -50%);
+    left:50%;
+    background-color: #3D414A;
+    border: 0;
+    outline: none;
+    caret-color: white;
+}
+
+.register-username:focus{
+    background-color: #3D414A;
+    color: white;
+}
+
+.register-text-3{
+    position: absolute;
+    color: white;
+    top:41%;
+}
+
+.register-password{
+    width: 100%;
+    height: 43px;
+    position: absolute;
+    color: white;
+    top:53%;
     transform: translate(-50%, -50%);
     left:50%;
     background-color: #3D414A;
@@ -102,53 +127,87 @@
     color: white;
 }
 
-.login-password:focus{
+.register-password:focus{
     background-color: #3D414A;
     color: white;
 }
 
-.login-text-3{
+.register-text-4{
     position: absolute;
     color: white;
-    top:65%;
-    left:4%;
+    top:62%;
 }
 
-.login-remember{
+.register-confirmpassword{
+    width: 100%;
+    height: 43px;
     position: absolute;
-    top:67.5%;
+    color: white;
+    top:74%;
+    transform: translate(-50%, -50%);
+    left:50%;
+    background-color: #3D414A;
+    border: 0;
+    outline: none;
+    caret-color: white;
 }
 
-.login-text-4{
+.register-confirmpassword:focus{
+    background-color: #3D414A;
+    color: white;
+}
+
+
+.register-terms{
     position: absolute;
-    color: #0E87C6;
-    top:65%;
-    right:0%;
-    text-decoration: none;
+    top:82%;
 }
 
-.login-submit{
+.register-privacy{
+    position: absolute;
+    top:88%;
+}
+
+
+.register-submit{
     position: absolute;
     color: white;
     background-color: #5865F2;
     border: 0;
-    top:85%;
+    top:100%;
     height: 43px;
 }
 
-.login-text-5{
+.register-text-5{
     position: absolute;
     color: white;
-    top:89%;
+    top:83.5%;
     transform: translate(-50%, -50%);
-    left:41%;
+    left:31%;
     
 }
-.login-text-6{
+.register-text-6{
+    position: absolute;
+    color: white;
+    top:89.5%;
+    transform: translate(-50%, -50%);
+    left:24%;
+    text-align: right;
+}
+
+.register-text-7{
+    position: absolute;
+    color: white;
+    top:92%;
+    transform: translate(-50%, -50%);
+    left:37%;
+    
+}
+.register-text-8{
     position: absolute;
     color: #0E87C6;
-    top:89%;
+    top:92%;
     transform: translate(-50%, -50%);
-    left:60%;
+    left:64%;
     text-decoration: none;
 }

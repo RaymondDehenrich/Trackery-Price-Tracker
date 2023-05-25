@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %} 
+<link href="{{url_for('static', filename='css/history.css')}}" rel="stylesheet" />
+<div class="history">
+    <img src="{{url_for('static',filename='images/History-icon.png')}}" class="background-image" />
+    <div class="history-box">
+        <p class="history-title">Your search history</p>
+        <hr class="history-title-line">
+        <div class="history-container">
+            {%for history in history_list%}
+            <div class="history-item">
+                <div class="history-item-inner">
+                <div class="history-class-part1">
+                <p class="history-item-name">{{history['history-search']}}</p>
+                <!-- temporary href link, need to be integrated with search page later -->
+                <a href="/search/{{history['history-search']}}" class="history-item-link">Search again</a>
+                </div>
+                <hr class="history-item-line">
+                <div class="history-class-part2">
+                <p class="history-item-avgprice">Average Price: {{history['average-price']}}</p>
+                <p class="history-item-date">{{history['date']}}</p>
+                </div>
+            </div>
+            </div>
+
+
+            {% endfor %} 
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}

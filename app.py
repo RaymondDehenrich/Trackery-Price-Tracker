@@ -21,12 +21,13 @@ def register():
 
 #Will need integration with user, for example, the link should be like /history/<username> or something like that
 #for this route will be a temporary link route
+#also, needed to have if user authenticated, means if the user logged in or not. if no or not the user, then cant get into the page.
 @app.route('/history',methods=['GET'])
 def history():
     #added temporary list for history, should be integrated with database
     
     #ASSUMPTION
-    #1. only have 5 variable each.
+    #1. only have 5 variable each and every variable is filled.
     #2. has already been sorted according to time.
     #3. everything other than history-id is string.
     history_list = [
@@ -43,6 +44,13 @@ def history():
         'average-price':'Rp.30.000',
         'time': '13:40',
         'date': '20/04/2025'
+        },
+        {
+        'history-id':3,
+        'history-search':'keyboard',
+        'average-price':'Rp.400.000',
+        'time': '6:50',
+        'date': '20/04/2026'
         }
     ]
     return render_template('history.html',history_list=history_list)

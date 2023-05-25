@@ -63,3 +63,23 @@
     padding: 10px;
     z-index: 1;
 }
+
+
+.home-input{
+    background-color: #3D414A;
+    border:0px;
+    color: white;
+    caret-color: white;
+    color: rgb(24, 2, 2);
+}
+
+.home-input:focus{
+    background-color: #3D414A;
+    color: white;
+    border:0;
+}
+
+.home-input::placeholder {
+    color: rgb(162, 162, 162);
+    opacity: 1;
+  }

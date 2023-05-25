@@ -89,7 +89,10 @@
     color: white;
     text-align: right;
     padding-left: 30px;
-    margin-left: auto; 
+    margin-left: auto;
+}
+
+.history-item-link-text{
     text-decoration: none;
     color: #0E87C6;
     text-overflow: ellipsis;
@@ -129,3 +132,4 @@
     padding-left: 30px;
     margin-left: auto; 
 }
+

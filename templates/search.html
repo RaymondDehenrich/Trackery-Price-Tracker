@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block content %}
+<link href="{{url_for('static', filename='css/search.css')}}" rel="stylesheet" />
+<div class="home">
+  <img
+    src="{{url_for('static',filename='images/search-icon.png')}}"
+    class="background-image"
+  />
+  <div class="home-text">
+    <p class="home-text-main">Search</p>
+    <div class="input-group mb-3 home-input-box">
+      <form id="home-input" action="{{url_for('home')}}" method="POST">
+        <input
+          type="text"
+          name="home-search"
+          class="form-control center home-input text-light"
+          placeholder="Start your Journey"
+          aria-label="Start your Journey"
+          aria-describedby="basic-addon1"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

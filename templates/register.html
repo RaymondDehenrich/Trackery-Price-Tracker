@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %} 
+<link href="{{url_for('static', filename='css/register.css')}}" rel="stylesheet" />
+<div class="register-page">
+    <img src="{{url_for('static',filename='images/login-icon.png')}}" class="background-image" />
+    <div class="register-box center">
+        <p class="register-title">Register</p>
+        <!-- might need change later for the action?? idk -->
+        <!-- i think validation still error? for now only make sure not empty validation 
+        this is user integration to do. lmao good luck -->
+        <form id="register-input" onsubmit="return validateRegister()" action="{{url_for('home')}}" method="POST" class="register-form">
+            <p class="register-text-1">Email</p>
+            <input type="text" name="register-email" class="form-control register-email" aria-label="Email" aria-describedby="basic-addon1">
+            <p class="register-text-2">Username</p>
+            <input type="text" name="register-username" class="form-control register-username" aria-label="Email" aria-describedby="basic-addon1">
+            <p class="register-text-3">Password</p>
+            <input type="password" name="register-password" class="form-control register-password" aria-label="password" aria-describedby="basic-addon1">
+            <p class="register-text-4">Confirm password</p>
+            <input type="password" name="register-confirmpassword" class="form-control register-confirmpassword" aria-label="password" aria-describedby="basic-addon1">
+            <input type="checkbox" id="terms" name="terms" class="register-terms">
+            <p class="register-text-5">Agree to Terms and Conditions</p>
+            <input type="checkbox" id="privacy" name="privacy" class="register-privacy">
+            <p class="register-text-6">Agree to Privacy Policy</p>
+            <input type="submit" name="login-submit" class="form-control register-submit" aria-label="register-submit" value="Register">
+        </form>
+        <p class="register-text-7">Already have an account?</p>
+        <a class="register-text-8" href="{{url_for('login')}}">Log In Here</a>
+    </div>
+</div>
+
+
+
+{% endblock %}

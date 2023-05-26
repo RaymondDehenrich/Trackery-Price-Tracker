@@ -12,10 +12,10 @@ import time
 
 def scrapeTokopedia(name):
     url = 'https://www.tokopedia.com/search?st=product&q='+name
-    headers = { 
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7", 
-    "Accept-Language": "en-US,en;q=0.9" 
+    headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Language": "en-US,en;q=0.9"
     }
     response = requests.get(url,headers=headers)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -34,10 +34,10 @@ def scrapeTokopedia(name):
 
 # def scrapeShopee(name):#might be impossible??? idk sumpah redirect ke login terus
 #     url = 'https://shopee.co.id/search?keyword='+name
-#     headers = { 
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 
-#     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7", 
-#     "Accept-Language": "en-US,en;q=0.9" 
+#     headers = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+#     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+#     "Accept-Language": "en-US,en;q=0.9"
 #     }
 #     response = requests.get(url,headers=headers)
 #     soup = BeautifulSoup(response.text, 'html.parser')
@@ -50,7 +50,7 @@ def scrapeLazada(query):
     driver_path = './chromedriver.exe'
 
     browser = webdriver.Chrome(executable_path=driver_path, options=chrome_options)
-    
+
     search_url = f'https://www.lazada.co.id/catalog/?q={query}&_keyori=ss'
 
     # load the search page
@@ -94,5 +94,3 @@ def dailyScrape():
         tokopedia_list=scrapeTokopedia(i)
         #idk ini mau process lagi gmn, either cmn langsung taro average harga dlm database atau gmn.
     return
-
-dailyScrape()

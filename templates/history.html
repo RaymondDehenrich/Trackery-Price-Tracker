@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block content %} 
-<link href="{{url_for('static', filename='css/history.css')}}" rel="stylesheet" />
+{% block content %}
+<link href="{{url_for('static', filename='css/layouts/history.css')}}" rel="stylesheet" />
 <div class="history">
     <img src="{{url_for('static',filename='images/History-icon.png')}}" class="background-image" />
     <div class="history-box">
@@ -26,7 +26,7 @@
             </div>
 
 
-            {% endfor %} 
+            {% endfor %}
         </div>
 
 

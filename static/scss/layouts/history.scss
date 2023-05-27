@@ -1,3 +1,5 @@
+@import "../_import.scss";
+
 .history {
     height: 100vh;
     width: 100%;
@@ -8,7 +10,7 @@
     display: flex;
     justify-content: center;
   }
-  
+
 .background-image {
     position: fixed;
     top: 500px;
@@ -130,6 +132,6 @@
     color: white;
     text-align: right;
     padding-left: 30px;
-    margin-left: auto; 
+    margin-left: auto;
 }
 

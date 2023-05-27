@@ -1,23 +1,59 @@
 {% extends "base.html" %} {% block content %}
-<link href="{{url_for('static', filename='css/search.css')}}" rel="stylesheet" />
-<div class="home">
+<link
+  href="{{url_for('static', filename='css/layouts/search.css')}}"
+  rel="stylesheet"
+/>
+<div class="search">
   <img
     src="{{url_for('static',filename='images/search-icon.png')}}"
-    class="background-image"
+    class="search__bgimg"
   />
-  <div class="home-text">
-    <p class="home-text-main">Search</p>
-    <div class="input-group mb-3 home-input-box">
-      <form id="home-input" action="{{url_for('home')}}" method="POST">
-        <input
-          type="text"
-          name="home-search"
-          class="form-control center home-input text-light"
-          placeholder="Start your Journey"
-          aria-label="Start your Journey"
-          aria-describedby="basic-addon1"
+
+  <div class="search__content">
+    <form id="search" class="search__barcontainer" action="{{url_for('search')}}" method="GET">
+      <input
+        type="text"
+        name="query"
+        class="search__bar"
+        placeholder="Start your Journey"
+      />
+    </form>
+
+    <div class="result">
+      <div class="result__summary">
+        <img
+          class="result__icon"
+          src="{{url_for('static',filename='images/logo-tokped.png')}}"
         />
-      </form>
+        <div class="result__text">Average Price: 50000000</div>
+      </div>
+      <div class="result__box">
+        <div class="result__empty">
+          Nothing to see here. search to start your journey.
+        </div>
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="result__summary">
+        <img
+          class="result__icon"
+          src="{{url_for('static',filename='images/logo-lazada.png')}}"
+        />
+        <div class="result__text">Average Price: 50000000</div>
+      </div>
+      <div class="result__box">
+        <div class="entry">
+          <img
+            class="entry__img"
+            src="{{url_for('static',filename='images/search-icon.png')}}"
+          />
+          <div class="entry__name">Ayam Goreng</div>
+          <div class="entry__price">20000</div>
+          <div class="entry__pagebutton">Visit Page</div>
+          <div class="entry__trackbutton">Add Tracking</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

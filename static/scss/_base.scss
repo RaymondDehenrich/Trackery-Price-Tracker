@@ -50,3 +50,10 @@ $button-blue: #5865f2;
   }
 }
 
+
+@mixin margin_hor_auto{
+  > * {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

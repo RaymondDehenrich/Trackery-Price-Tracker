@@ -5,10 +5,8 @@
     background-color: $bg-darkblue;
 
     &__content{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         @include margin_vert(50px);
+        @include margin_hor_auto;
     }
 
     &__bgimg{
@@ -19,8 +17,7 @@
 
     &__barcontainer{
         width: 100%;
-        display: flex;
-        justify-content: center;
+        @include margin_hor_auto;
     }
 
     &__bar{

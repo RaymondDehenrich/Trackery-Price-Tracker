@@ -20,7 +20,7 @@
     <div class="line"></div>
 
 
-    <div class="inventory__list">
+    <form class="inventory__list" action="{{url_for('detail')}}">
       <div class="entry">
         <img
           class="entry__img"
@@ -28,10 +28,10 @@
         />
         <div class="entry__name">Ayam Goreng</div>
         <div class="entry__price">20000</div>
-        <div class="entry__firstbutton">More Info</div>
-        <div class="entry__secondbutton">Remove Tracking</div>
+        <button class="entry__firstbutton">More Info</button>
+        <button class="entry__secondbutton">Remove Tracking</button>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 {% endblock %}

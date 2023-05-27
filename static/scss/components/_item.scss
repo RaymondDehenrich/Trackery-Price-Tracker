@@ -4,6 +4,7 @@
     @include button;
     width: 80%;
     margin: 5px 0px;
+    color: $text-white;
 }
 
 @mixin item{

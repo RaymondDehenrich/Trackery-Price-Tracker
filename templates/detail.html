@@ -9,7 +9,7 @@
     class="detail__bgimg"
   />
 
-  <div class="detail__content">
+  <form class="detail__content">
     <div class="detailbox">
       <div class="header">
         <div class="header__center">Visit Item</div>
@@ -32,8 +32,8 @@
             src="{{url_for('static',filename='images/plot.webp')}}"
           />
           <div class="info__buttoncontainer">
-            <div class="info__firstbutton">Visit Item</div>
-            <div class="info__secondbutton">Remove Tracking</div>
+            <button class="info__firstbutton">Visit Item</button>
+            <button class="info__secondbutton">Remove Tracking</button>
           </div>
         </div>
       </div>
@@ -61,6 +61,6 @@
           </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
 {% endblock %}

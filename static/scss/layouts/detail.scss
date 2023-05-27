@@ -80,11 +80,13 @@
         @include button;
         background-color: $button-blue;
         flex-basis: 150px;
+        color: $text-white;
     }
     &__secondbutton{
         @include button;
         background-color: $button-orange;
         flex-basis: 150px;
+        color: $text-white;
     }
 
 }

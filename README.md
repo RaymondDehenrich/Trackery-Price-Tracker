@@ -4,7 +4,5 @@ This repository is about a software engineering team project called Trackery whi
 # How to setup
 1. Install python.
 2. Navigate to the project directory.
-3. Run `pip install pymysql`.
-4. Run `pip install sqlalchemy`.
-5. Run `pip install -r requirements.txt`.
-6. Run `python app.py`.
+3. Run `pip install -r requirements.txt`.
+4. Run `python app.py`.

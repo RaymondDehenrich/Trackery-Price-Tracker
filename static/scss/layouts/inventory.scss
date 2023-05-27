@@ -13,6 +13,7 @@
         flex-direction: column;
         align-items: center;
         color: $text-white;
+        @include margin_vert(50px);
     }
 
     &__bgimg{
@@ -34,8 +35,6 @@
 .header{
     @include content-child-width;
     @include tri-header;
-    margin-top: 50px;
-    margin-bottom: 25px;
 
     &__center{
         text-align: center;
@@ -57,5 +56,4 @@
     @include content-child-width;
     height: 1px;
     background-color: $text-gray;
-    margin-bottom: 25px;
 }

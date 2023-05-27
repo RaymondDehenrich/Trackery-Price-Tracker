@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block content %} 
-<link href="{{url_for('static', filename='css/login.css')}}" rel="stylesheet" />
+{% block content %}
+<link href="{{url_for('static', filename='css/layouts/login.css')}}" rel="stylesheet" />
 <div class="login-page">
     <img src="{{url_for('static',filename='images/login-icon.png')}}" class="background-image" />
     <div class="login-box center">
         <p class="login-title">Sign in to your account</p>
         <!-- might need change later for the action?? idk -->
-        <!-- i think validation still error? for now only make sure not empty validation 
+        <!-- i think validation still error? for now only make sure not empty validation
         this is user integration to do. lmao good luck -->
         <form id="login-input" onsubmit="return validateLogin()" action="{{url_for('home')}}" method="POST" class="login-form">
             <p class="login-text-1">Email</p>

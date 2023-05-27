@@ -1,0 +1,21 @@
+$text-white: #ffffff;
+$text-gray: #8f8c8c;
+
+$section-gray: #3d414a;
+$section-darkgray: #212328;
+$section-lightgray: #808080;
+
+$bg-black: #111111;
+$bg-darkblue: #121318;
+
+$border-blue: #5865f2;
+
+$button-orange: #ff6740;
+$button-blue: #5865f2;
+
+@mixin button {
+  border-radius: 5px;
+  padding: 8px 15px;
+  outline: 0;
+  border: 0;
+}

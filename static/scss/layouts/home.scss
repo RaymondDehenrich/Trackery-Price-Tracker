@@ -1,4 +1,6 @@
-.return-register{
+@import "../_import.scss";
+
+.home{
     height:100vh;
     width:100%;
     background-color:#121318;
@@ -15,7 +17,7 @@
     opacity: 0.5;
     z-index: 1;
   }
-.return-text{
+.home-text{
     position: absolute;
     top: 40%;
     left: 50%;
@@ -23,9 +25,9 @@
     text-align: center;
     z-index: 2;
     width:auto;
-    height: 100px;
+    height: 50px;
 }
-.return-text-main{
+.home-text-main{
     font-size:32px;
     color:#FFFFFF;
     opacity: 1;
@@ -33,6 +35,26 @@
     justify-content: center;
     align-items:center;
     text-align: center;
+}
+.home-text-decs{
+    font-size:20px;
+    color:#FFFFFF;
+    opacity: 1;
+    z-index: 2;
+    justify-content: center;
+    align-items:center;
+    text-align: center;
+    padding-left:20%;
+    padding-right: 20%;
+    top:10%;
+}
+.home-input-box{
+    top: 60%;
+}
+
+.home-input{
+    text-align: center;
+    width: 40%;
 }
 
 .center {
@@ -44,17 +66,22 @@
     z-index: 1;
 }
 
-.login-box{
-    width:50%;
-    top:100%;
+
+.home-input{
+    background-color: #3D414A;
+    border:0px;
+    color: white;
+    caret-color: white;
+    color: rgb(24, 2, 2);
 }
 
-.login-button{
-    position: absolute;
+.home-input:focus{
+    background-color: #3D414A;
     color: white;
-    background-color: #5865F2;
-    border: 0;
-    top:85%;
-    height: 43px;
-    width: 50%;
+    border:0;
 }
+
+.home-input::placeholder {
+    color: rgb(162, 162, 162);
+    opacity: 1;
+  }

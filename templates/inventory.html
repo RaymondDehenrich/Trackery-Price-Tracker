@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+<link
+  href="{{url_for('static', filename='css/layouts/inventory.css')}}"
+  rel="stylesheet"
+/>
+<div class="inventory">
+  <img
+    src="{{url_for('static',filename='images/search-logo.png')}}"
+    class="inventory__bgimg"
+  />
+
+  <div class="inventory__content">
+
+    <div class="header">
+      <div class="header__center">Tracking List</div>
+      <div class="header__right">0/20</div>
+    </div>
+
+
+    <div class="line"></div>
+
+
+    <form class="inventory__list" action="{{url_for('detail')}}">
+      <div class="entry">
+        <img
+          class="entry__img"
+          src="{{url_for('static',filename='images/search-icon.png')}}"
+        />
+        <div class="entry__name">Ayam Goreng</div>
+        <div class="entry__price">20000</div>
+        <button class="entry__firstbutton">More Info</button>
+        <button class="entry__secondbutton">Remove Tracking</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

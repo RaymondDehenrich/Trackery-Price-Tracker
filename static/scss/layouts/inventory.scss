@@ -1,0 +1,59 @@
+@import "../_import.scss";
+
+@mixin content-child-width{
+    width: 50%;
+}
+
+.inventory{
+    @include page;
+    background-color: $bg-darkblue;
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: $text-white;
+        @include margin_vert(50px);
+    }
+
+    &__bgimg{
+        width: 70vw;
+        opacity: 0.25;
+        right: 0;
+        transform: translate(10%, 0);
+    }
+
+    &__list{
+        @include content-child-width;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+
+.header{
+    @include content-child-width;
+    @include tri-header;
+
+    &__center{
+        text-align: center;
+        font-size: 20px;
+    }
+
+    &__right{
+        text-align: right;
+        font-size: 20px;
+    }
+}
+
+.entry{
+    @include item;
+}
+
+
+.line{
+    @include content-child-width;
+    height: 1px;
+    background-color: $text-gray;
+}

@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block content %}
+<link
+  href="{{url_for('static', filename='css/layouts/detail.css')}}"
+  rel="stylesheet"
+/>
+<div class="detail">
+  <img
+    src="{{url_for('static',filename='images/search-logo.png')}}"
+    class="detail__bgimg"
+  />
+
+  <form class="detail__content">
+    <div class="detailbox">
+      <div class="header">
+        <div class="header__center">Visit Item</div>
+        <div class="header__right">
+          <a href="{{url_for('inventory')}}" class="header__link">Return</a>
+        </div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="info">
+        <img
+          class="info__img"
+          src="{{url_for('static',filename='images/search-logo.png')}}"
+        />
+
+        <div class="info__box">
+          <div class="info__title">Ayam Goreng</div>
+          <div class="info__price">goceng</div>
+          <img
+            class="info__graph"
+            src="{{url_for('static',filename='images/plot.webp')}}"
+          />
+          <div class="info__buttoncontainer">
+            <button class="info__firstbutton">Visit Item</button>
+            <button class="info__secondbutton">Remove Tracking</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pred__title">Price Prediction</div>
+
+      <div class="pred">
+        <div class="pred__entry">
+          <div class="pred__title">Tomorrow</div>
+          <div class="pred__line"></div>
+          <div class="pred__price">5 morbillion dollars</div>
+          <div class="pred__note">Accuracy Rate<br />95%</div>
+        </div>
+        <div class="pred__entry">
+          <div class="pred__title">In 3 days</div>
+          <div class="pred__line"></div>
+          <div class="pred__price">5 morbillion dollars</div>
+          <div class="pred__note">Accuracy Rate<br />95%</div>
+        </div>
+        <div class="pred__entry">
+          <div class="pred__title">Next week</div>
+          <div class="pred__line"></div>
+          <div class="pred__price">5 morbillion dollars</div>
+          <div class="pred__note">Accuracy Rate<br />95%</div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

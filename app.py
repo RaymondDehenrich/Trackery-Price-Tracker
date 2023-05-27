@@ -5,23 +5,28 @@ from scripts.linear_reg_pred import *
 from scripts.scraper import *
 from database import engine
 from sqlalchemy.sql import text
-
-
+import sass
 
 app = Flask(__name__)
 
+def recompile_sass():
+    sass.compile(dirname=('static/scss', 'static/css'))
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    recompile_sass()
     page_name="home"
     return render_template('home.html',page_name=page_name)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+    recompile_sass()
     page_name="login"
     return render_template('login.html',page_name=page_name)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
+    recompile_sass()
     page_name="register"
     return render_template('register.html',page_name=page_name)
 
@@ -31,6 +36,7 @@ def user_to_db(email,password,username):
 
 @app.route('/send_data', methods = ['POST'])
 def send_data():
+    recompile_sass()
     email = request.form['register-email']
     password = request.form['register-password']
     username = request.form['register-username']
@@ -45,6 +51,8 @@ def send_data():
 #also, needed to have if user authenticated, means if the user logged in or not. if no or not the user, then cant get into the page.
 @app.route('/history',methods=['GET'])
 def history():
+    recompile_sass()
+
     #added temporary list for history, should be integrated with database
 
     #ASSUMPTION
@@ -79,6 +87,7 @@ def history():
 
 @app.route('/search',methods=['GET'])
 def search():
+    recompile_sass()
     page_name = "search"
     return render_template("search.html", page_name=page_name)
 
@@ -98,12 +107,6 @@ if __name__ == "__main__":
     scheduler_thread = threading.Thread(target=start_scheduler)
     scheduler_thread.start()
     '''
-
+    recompile_sass()
     '''BUAT RUN KE WEB'''
     app.run(host='0.0.0.0',debug=True)
-
-
-         
-        
-
-

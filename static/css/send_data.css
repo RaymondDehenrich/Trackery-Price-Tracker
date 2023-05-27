@@ -1,4 +1,4 @@
-.home{
+.return-register{
     height:100vh;
     width:100%;
     background-color:#121318;
@@ -15,7 +15,7 @@
     opacity: 0.5;
     z-index: 1;
   }
-.home-text{
+.return-text{
     position: absolute;
     top: 40%;
     left: 50%;
@@ -23,9 +23,9 @@
     text-align: center;
     z-index: 2;
     width:auto;
-    height: 50px;
+    height: 100px;
 }
-.home-text-main{
+.return-text-main{
     font-size:32px;
     color:#FFFFFF;
     opacity: 1;
@@ -33,26 +33,6 @@
     justify-content: center;
     align-items:center;
     text-align: center;
-}
-.home-text-decs{
-    font-size:20px;
-    color:#FFFFFF;
-    opacity: 1;
-    z-index: 2;
-    justify-content: center;
-    align-items:center;
-    text-align: center;
-    padding-left:20%;
-    padding-right: 20%;
-    top:10%;
-}
-.home-input-box{
-    top: 60%;
-}
-
-.home-input{
-    text-align: center;
-    width: 40%;
 }
 
 .center {
@@ -64,3 +44,17 @@
     z-index: 1;
 }
 
+.login-box{
+    width:50%;
+    top:100%;
+}
+
+.login-button{
+    position: absolute;
+    color: white;
+    background-color: #5865F2;
+    border: 0;
+    top:85%;
+    height: 43px;
+    width: 50%;
+}

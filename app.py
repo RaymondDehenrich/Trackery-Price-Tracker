@@ -91,6 +91,13 @@ def search():
     page_name = "search"
     return render_template("search.html", page_name=page_name)
 
+
+@app.route('/inventory',methods=['GET'])
+def inventory():
+    recompile_sass()
+    page_name = "inventory"
+    return render_template("inventory.html", page_name=page_name)
+
 #for /search route, might want to have data = request.form.get('home-search'),
 # so that user can directly start search on home and redirect to /search
 '''

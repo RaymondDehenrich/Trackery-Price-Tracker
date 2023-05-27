@@ -32,13 +32,13 @@
         margin: 5px 0px;
     }
 
-    &__pagebutton{
-        @include item-button;
-        background-color: $button-orange;
-    }
-
-    &__trackbutton{
+    &__firstbutton{
         @include item-button;
         background-color: $button-blue;
+    }
+
+    &__secondbutton{
+        @include item-button;
+        background-color: $button-orange;
     }
 }

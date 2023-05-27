@@ -44,6 +44,7 @@ def email_check(em):
 
 @app.route('/send_data', methods = ['POST'])
 def send_data():
+    recompile_sass()
     page = "send_data"
     email = request.form['register-email']
     password = request.form['register-password']

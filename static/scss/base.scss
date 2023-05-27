@@ -1,0 +1,93 @@
+$text-white: #ffffff;
+$text-gray: #8f8c8c;
+
+$section-gray: #3d414a;
+$section-darkgray: #212328;
+$section-lightgray: #808080;
+
+$bg-black: #111111;
+$bg-darkblue: #121318;
+
+$border-blue: #5865f2;
+
+$button-orange: #ff6740;
+$button-blue: #5865f2;
+
+@mixin button {
+  border-radius: 5px;
+  padding: 8px 15px;
+  outline: 0;
+  border: 0;
+}
+
+@mixin page {
+  z-index: 0;
+  overflow: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+@mixin page__bgimg($width, $opacity, $transform, $align: left) {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width: $width;
+  opacity: $opacity;
+  transform: $transform;
+  @if $align == right {
+    right: 0;
+  }
+}
+
+@mixin page__content {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+@mixin _inputbar-style(
+  $width,
+  $bg-color: $section-gray,
+  $text-color: $text-white,
+  $placeholder-color: $text-gray
+) {
+  background-color: $bg-color;
+  color: $text-color;
+  caret-color: $text-color;
+  width: $width;
+
+  border: 0px;
+  outline: 0;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+@mixin inputbar(
+  $width,
+  $bg-color: $section-gray,
+  $text-color: $text-white,
+  $placeholder-color: $text-gray,
+  $focus-color: $border-blue,
+) {
+  @include _inputbar-style(
+    $width,
+    $bg-color,
+    $text-color,
+    $placeholder-color
+  );
+  &:focus {
+    @include _inputbar-style(
+      $width,
+      $bg-color,
+      $text-color,
+      $placeholder-color
+    );
+    box-shadow: 0 0 5px 2px $focus-color;
+  }
+
+  &::placeholder {
+    color: $placeholder-color;
+  }
+}

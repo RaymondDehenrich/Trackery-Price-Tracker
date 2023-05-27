@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% block content %}
+<link
+  href="{{url_for('static', filename='css/layouts/detail.css')}}"
+  rel="stylesheet"
+/>
+<div class="detail">
+  <img
+    src="{{url_for('static',filename='images/search-logo.png')}}"
+    class="detail__bgimg"
+  />
+
+  <div class="detail__content">
+    <div class="detailbox">
+
+      <div class="header">
+        <div class="header__center">
+          More Info
+        </div>
+        <div class="header__right">
+          Return
+        </div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="info">
+        <img class="info__img" src="{{url_for('static',filename='images/search-logo.png')}}"/>
+
+        <div class="info__box">
+          <div class="info__title">
+            Ayam Goreng
+          </div>
+          <div class="info__price">
+            goceng
+          </div>
+          <img class="info__graph" src="{{url_for('static',filename='images/plot.webp')}}"/>
+          <div class="info__buttoncontainer">
+            <div class="info__firstbutton">
+              Visit Item
+            </div>
+            <div class="info__secondbutton">
+              Remove Tracking
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pred">
+        <div class="pred__title">
+          Price Prediction
+        </div>
+        <div class="pred__list">
+          <div class="pred__entry">
+
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+{% endblock %}

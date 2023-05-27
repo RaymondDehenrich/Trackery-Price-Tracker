@@ -18,4 +18,35 @@ $button-blue: #5865f2;
   padding: 8px 15px;
   outline: 0;
   border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
+
+@mixin margin_vert($amt){
+  > * {
+    margin-top: ($amt/2);
+    margin-bottom: ($amt/2);
+  }
+  > *:first-child{
+    margin-top: $amt;
+  }
+  > *:last-child{
+    margin-bottom: $amt;
+  }
+}
+
+@mixin margin_hor($amt){
+  > * {
+    margin-left: ($amt/2);
+    margin-right: ($amt/2);
+  }
+  > *:first-child{
+    margin-left: $amt;
+  }
+  > *:last-child{
+    margin-right: $amt;
+  }
+}
+

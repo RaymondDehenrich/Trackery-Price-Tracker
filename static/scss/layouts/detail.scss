@@ -1,0 +1,90 @@
+@import "../import.scss";
+
+.detail{
+    @include page;
+    background-color: $bg-darkblue;
+    &__bgimg{
+        width: 70vw;
+        opacity: 0.25;
+        transform: translate(-10%, 0);
+    }
+    &__content{
+        color: $text-white;
+    }
+}
+
+
+.detailbox{
+    width: 70%;
+    margin: 0px auto;
+    margin-top: 50px;
+    border-radius: 5px;
+    background-color: $section-darkgray;
+
+}
+
+.header{
+    @include tri-header;
+
+    &__center{
+        text-align: center;
+        padding: 20px;
+    }
+
+    &__right{
+        text-align: right;
+        padding: 20px;
+        color: $button-blue;
+    }
+}
+
+.line{
+    width: 100%;
+    height: 1px;
+    background-color: $text-gray;
+    margin-bottom: 20px;
+}
+
+
+.info{
+    display: flex;
+    width: 80%;
+    margin: 0px auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+
+    &__img{
+        width: 40%;
+        min-width: 100px;
+    }
+
+    &__box{
+        width: 60%;
+        @include margin_vert(10px);
+    }
+
+    &__graph{
+        width: 100%;
+        border-radius: 5px;
+    }
+
+
+    &__buttoncontainer{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__firstbutton{
+        @include button;
+        background-color: $button-blue;
+        flex-basis: 150px;
+    }
+    &__secondbutton{
+        @include button;
+        background-color: $button-orange;
+        flex-basis: 150px;
+    }
+
+}

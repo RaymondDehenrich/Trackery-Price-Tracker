@@ -32,9 +32,17 @@
     }
 
     &__right{
-        text-align: right;
         padding: 20px;
+        text-align: right;
+    }
+
+    &__link{
         color: $button-blue;
+        text-decoration: none;
+
+        &:hover{
+            text-decoration: underline;
+        }
     }
 }
 

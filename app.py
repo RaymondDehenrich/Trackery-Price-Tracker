@@ -1,8 +1,12 @@
-from flask import Flask, render_template,jsonify
+from flask import Flask, render_template,jsonify,request
 import schedule
 import time
 from scripts.linear_reg_pred import *
 from scripts.scraper import *
+from database import engine
+from sqlalchemy.sql import text
+
+
 
 app = Flask(__name__)
 
@@ -20,6 +24,19 @@ def login():
 def register():
     page_name="register"
     return render_template('register.html',page_name=page_name)
+
+def user_to_db(email,password,username):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"insert into User (email, username, password) VALUES('{email}', '{username}', md5('{password}'));"))
+
+@app.route('/send_data', methods = ['POST'])
+def send_data():
+    email = request.form['register-email']
+    password = request.form['register-password']
+    username = request.form['register-username']
+    user_to_db(email,password,username)
+    page = "send_data"
+    return render_template('send_data.html',page_name = page)
 
 #Note, Will also need a /logout route for logging out, i think a html page still needed? idk need further research.
 
@@ -81,4 +98,12 @@ if __name__ == "__main__":
     scheduler_thread = threading.Thread(target=start_scheduler)
     scheduler_thread.start()
     '''
+
+    '''BUAT RUN KE WEB'''
     app.run(host='0.0.0.0',debug=True)
+
+
+         
+        
+
+

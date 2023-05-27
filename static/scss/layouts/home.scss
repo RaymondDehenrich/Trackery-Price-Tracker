@@ -53,8 +53,9 @@
 }
 
 .home-input{
-    text-align: center;
-    width: 40%;
+    @include inputbar(40%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .center {

@@ -1,4 +1,4 @@
-@import "../_base.scss";
+@import "../_helpers.scss";
 
 @mixin _inputbar-style(
   $width,
@@ -17,6 +17,7 @@
   padding: 10px;
   border-radius: 5px;
   text-align: center;
+  font-size: $font-size-subtitle;
 }
 
 @mixin inputbar(

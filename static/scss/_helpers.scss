@@ -15,11 +15,11 @@ $button-blue: #5865f2;
 
 
 $font-size-title: 2rem;
-$font-size-subtitle: 1.25rem;
+$font-size-subtitle: 1.125rem;
 
 @mixin button {
   border-radius: 5px;
-  padding: 8px 15px;
+  padding: 0.25em;
   outline: 0;
   border: 0;
   display: flex;

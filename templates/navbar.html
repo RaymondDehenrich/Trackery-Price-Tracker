@@ -1,49 +1,52 @@
-<link href="{{url_for('static', filename='css/layouts/navbar.css')}}" rel="stylesheet" />
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-  <div class="container-fluid">
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <a class="navbar-brand px-1" href="{{url_for('home')}}">
-        <img height="40px" src="{{url_for('static', filename='images/logo.png')}}" alt="Logo" class="d-inline-block" />
-      </a>
-      <ul class="navbar-nav">
-        <li class="nav-item px-3">
-          <a class="nav-link" href="{{url_for('home')}}">Home</a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link" href="{{url_for('search')}}">Search</a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link" href="{{url_for('inventory')}}">Inventory</a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link" href="{{url_for('history')}}">History</a>
-        </li>
-      </ul>
-    </div>
-    <a class="text-light" id="profile-button">
-      <i style="font-size: 35px" class="fa-regular fa-circle-user"></i>
+<script>
+  $(document).ready(() => {
+    $("#profile-button").click(() => {
+      $("#profile").toggle();
+    });
+    $("#navbar-button").click(()=>{
+      $("#routing").toggleClass("routing--hidden");
+    })
+  });
+</script>
+
+<link
+  href="{{url_for('static', filename='css/layouts/navbar.css')}}"
+  rel="stylesheet"
+/>
+<nav class="navbar">
+  <button class="navbar__toggler" type="button" id="navbar-button">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <div class="routing routing--hidden" id="routing">
+    <a class="routing__logocontainer" href="{{url_for('home')}}">
+      <img
+        src="{{url_for('static', filename='images/logo.png')}}"
+        alt="Logo"
+        class="routing__logo"
+      />
     </a>
+    <a class="routing__link" href="{{url_for('home')}}">Home</a>
+    <a class="routing__link" href="{{url_for('search')}}">Search</a>
+    <a class="routing__link" href="{{url_for('inventory')}}">Inventory</a>
+    <a class="routing__link" href="{{url_for('history')}}">History</a>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropdown__icon" id="profile-button">
+      <i class="fa fa-regular fa-circle-user"></i>
+    </button>
+
     <!-- will need some user integration check here, if logged in, then dropdown-menu A, else menu B. -->
     <!-- will still also need to add the second dropdown-menu -->
-    <div id="dropdown-menu-guest" class="guest-modal">
-      <ul>
-          <i style="font-size: 35px" class="fa-regular fa-circle-user text-light"></i>
-          <p class="guest-model-name">Guest</p>
-          <hr class="guest-modal-line">
-          <div class="guest-modal-Box1"><a href="/login" class="guest-model-login">Sign In</a></div>
-          <div class="guest-modal-Box2"><a href="/register" class="guest-model-register">register</a></div>
-      </ul>
-  </div>
+    <div class="dropdown__box" id="profile">
+      <div>
+        <i class="fa fa-regular fa-circle-user dropdown__logo"></i>
+      </div>
+      <div class="dropdown__name">Guest</div>
+      <div class="dropdown__line"></div>
+      <a href="{{url_for('login')}}" class="dropdown__login">Sign In</a>
+      <a href="{{url_for('register')}}" class="dropdown__register">Register</a>
+    </div>
   </div>
 </nav>

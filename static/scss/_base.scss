@@ -39,7 +39,7 @@ $button-blue: #5865f2;
   }
 }
 
-@mixin child_margin_hor($amt) {
+@mixin child_margin_hor($amt, $apply_edge: true) {
   > * {
     margin-left: ($amt/2);
     margin-right: ($amt/2);

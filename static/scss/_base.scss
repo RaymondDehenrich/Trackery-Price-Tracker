@@ -24,36 +24,43 @@ $button-blue: #5865f2;
   text-align: center;
 }
 
-@mixin margin_vert($amt){
+@mixin child_margin_vert($amt, $apply_edge: true) {
   > * {
     margin-top: ($amt/2);
     margin-bottom: ($amt/2);
   }
-  > *:first-child{
-    margin-top: $amt;
-  }
-  > *:last-child{
-    margin-bottom: $amt;
+  @if ($apply_edge) {
+    > *:first-child {
+      margin-top: $amt;
+    }
+    > *:last-child {
+      margin-bottom: $amt;
+    }
   }
 }
 
-@mixin margin_hor($amt){
+@mixin child_margin_hor($amt) {
   > * {
     margin-left: ($amt/2);
     margin-right: ($amt/2);
   }
-  > *:first-child{
-    margin-left: $amt;
-  }
-  > *:last-child{
-    margin-right: $amt;
+  @if ($apply_edge) {
+    > *:first-child {
+      margin-left: $amt;
+    }
+    > *:last-child {
+      margin-right: $amt;
+    }
   }
 }
 
+@mixin fix_image_ratio($aspect-ratio: 16/9) {
+  aspect-ratio: $aspect-ratio;
+  object-fit: cover;
+}
 
-@mixin margin_hor_auto{
+@mixin child_margin_auto{
   > * {
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
   }
 }

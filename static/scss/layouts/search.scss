@@ -5,8 +5,8 @@
     background-color: $bg-darkblue;
 
     &__content{
-        @include margin_vert(50px);
-        @include margin_hor_auto;
+        @include child_margin_vert(50px);
+        @include child_margin_auto;
     }
 
     &__bgimg{
@@ -17,7 +17,7 @@
 
     &__barcontainer{
         width: 100%;
-        @include margin_hor_auto;
+        @include child_margin_auto;
     }
 
     &__bar{
@@ -29,7 +29,7 @@
 .result{
     background-color: $section-gray;
     color: $text-white;
-    padding: 20px 0px;
+    padding: 1.5em;
 
     width: 80%;
     border-radius: 10px;
@@ -37,21 +37,37 @@
     &__summary{
         display: flex;
         align-items: center;
-        margin: 0px 30px;
     }
 
     &__icon{
-        width: 120px;
-        margin-right: 50px;
+        width: Min(120px, 15vw);
+        margin-right: 2em;
+    }
+
+    &__empty{
+        text-align: center;
     }
 
     &__box{
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-auto-flow: column;
         overflow-x: auto;
+        scrollbar-color: $button-orange $section-lightgray; //firefox
+        gap: 1em;
+        // chrome
+        &::-webkit-scrollbar{
+            background-color: $section-lightgray;
+            border-radius: 5px;
+            height: 0.5em;
+        }
+        &::-webkit-scrollbar-thumb{
+            background-color: $button-orange;
+            border-radius: 5px;
+        }
     }
 }
 
 .entry{
     @include item;
+    margin: 1em auto;
 }

@@ -3,43 +3,32 @@
 @mixin item-button{
     @include button;
     width: 80%;
-    margin: 5px 0px;
     color: $text-white;
 }
 
 @mixin item{
     background-color: $section-darkgray;
     text-align: center;
-    margin: 10px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     border-radius: 10px;
     overflow: hidden;
-    flex-shrink: 0;
-    padding-bottom: 5px;
+    width: Min(200px, 40vw);
+    @include child_margin_vert(1em);
 
     &__img{
-        width: 200px;
+        width: 100%;
         background-color: $section-lightgray;
-        margin-bottom: 5px;
-    }
-
-    &__name{
-        margin: 5px 0px;
-    }
-
-    &__price{
-        margin: 5px 0px;
+        margin-top: 0px !important;
     }
 
     &__firstbutton{
         @include item-button;
         background-color: $button-blue;
+        margin-inline: auto;
     }
 
     &__secondbutton{
         @include item-button;
         background-color: $button-orange;
+        margin-inline: auto;
     }
 }

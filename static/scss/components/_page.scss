@@ -3,11 +3,11 @@
 @mixin page {
   z-index: 0;
   overflow: hidden;
+  min-height: 100svh;
   position: relative;
-  min-height: 100vh;
 
   &__bgimg {
-    position: absolute;
+    position: fixed;
     z-index: 1;
     top: 0;
   }

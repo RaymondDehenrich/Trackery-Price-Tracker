@@ -21,7 +21,7 @@
     }
 
     &__bar{
-        @include inputbar(30%);
+        @include inputbar(Max(30%, 250px));
     }
 
 }

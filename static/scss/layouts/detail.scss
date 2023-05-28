@@ -68,7 +68,7 @@
 
     &__box{
         width: 60%;
-        @include child_margin_vert(1em, false);
+        @include child_margin_vert(1em, true);
     }
 
     &__graph{
@@ -123,7 +123,7 @@
         border-radius: 5px;
         padding: 10px;
         flex-basis: 150px;
-        margin: 1em;
+        margin-inline: 1em;
     }
 
     &__note{

@@ -13,6 +13,10 @@ $border-blue: #5865f2;
 $button-orange: #ff6740;
 $button-blue: #5865f2;
 
+
+$font-size-title: 2rem;
+$font-size-subtitle: 1.25rem;
+
 @mixin button {
   border-radius: 5px;
   padding: 8px 15px;
@@ -24,33 +28,31 @@ $button-blue: #5865f2;
   text-align: center;
 }
 
-@mixin child_margin_vert($amt, $apply_edge: true) {
+@mixin child_margin_vert($amt, $zero_edge: false) {
   > * {
     margin-top: ($amt/2);
     margin-bottom: ($amt/2);
   }
-  @if ($apply_edge) {
-    > *:first-child {
-      margin-top: $amt;
-    }
-    > *:last-child {
-      margin-bottom: $amt;
-    }
+  $edge: if($zero_edge, 0, $amt);
+  > *:first-child {
+    margin-top: $edge;
+  }
+  > *:last-child {
+    margin-bottom: $edge;
   }
 }
 
-@mixin child_margin_hor($amt, $apply_edge: true) {
+@mixin child_margin_hor($amt, $zero_edge: false) {
   > * {
     margin-left: ($amt/2);
     margin-right: ($amt/2);
   }
-  @if ($apply_edge) {
-    > *:first-child {
-      margin-left: $amt;
-    }
-    > *:last-child {
-      margin-right: $amt;
-    }
+  $edge: if($zero_edge, 0, $amt);
+  > *:first-child {
+    margin-left: $edge;
+  }
+  > *:last-child {
+    margin-right: $edge;
   }
 }
 
@@ -59,7 +61,7 @@ $button-blue: #5865f2;
   object-fit: cover;
 }
 
-@mixin child_margin_auto{
+@mixin child_margin_auto {
   > * {
     margin-inline: auto;
   }

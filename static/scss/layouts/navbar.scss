@@ -37,7 +37,6 @@
     @include child_margin_hor(3em, true);
     grid-row: 1;
     grid-column: 1;
-    transition: all 0.5s;
 
     @media screen and (max-width: 600px) {
         grid-row: 2;
@@ -47,13 +46,8 @@
             text-align: center;
             margin: 0;
         }
-    }
-
-    overflow: hidden;
-    max-height: 100vh;
-    &--hidden{
-        @media screen and (max-width: 600px) {
-            max-height: 0;
+        &--hidden{
+            display: none;
         }
     }
 

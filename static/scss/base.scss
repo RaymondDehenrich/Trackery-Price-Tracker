@@ -2,7 +2,11 @@ body{
     margin: 0;
     border: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
     font-family: system-ui;
+
+    min-height: 100vh;
 }
 
 button{

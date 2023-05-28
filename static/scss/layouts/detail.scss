@@ -101,10 +101,10 @@
 
 .pred{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
     text-align: center;
-    padding: 0 10em;
+    column-gap: 5em;
 
     &__title{
         text-align: center;

@@ -1,7 +1,7 @@
 @import "../_import.scss";
 
 @mixin content-child-width{
-    width: 50%;
+    width: Max(50%, 12em);
 }
 
 .inventory{

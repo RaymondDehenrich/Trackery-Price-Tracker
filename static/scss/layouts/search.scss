@@ -5,7 +5,7 @@
     background-color: $bg-darkblue;
 
     &__content{
-        @include child_margin_vert(50px);
+        @include child_margin_vert(3em);
         @include child_margin_auto;
     }
 

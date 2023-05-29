@@ -28,7 +28,7 @@ def login():
 def register():
     recompile_sass()
     page_name="register"
-    return render_template('register.html',page_name=page_name)
+    return render_template('register.html',page_name=page_name, verifp = 0)
 
 def user_to_db(email,password,username):
     with engine.connect() as conn:
@@ -54,13 +54,7 @@ def send_data():
         user_to_db(email,password,username)
         return render_template('send_data.html',page_name = page)
     else:
-        return render_template('send_failed.html',page_name = "send_failed")
-
-@app.route('/send_failed', methods = ['GET','POST'])
-def fail_send():
-    recompile_sass()
-    page_name = "send_failed"
-    return render_template('register.html',page_name = page_name)
+        return render_template('register.html',page_name = "register", verifp = 1)
 
 
 #Note, Will also need a /logout route for logging out, i think a html page still needed? idk need further research.
@@ -142,3 +136,9 @@ if __name__ == "__main__":
     recompile_sass()
     '''BUAT RUN KE WEB'''
     app.run(host='0.0.0.0',debug=True)
+
+
+
+
+
+

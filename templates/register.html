@@ -3,6 +3,8 @@
 <link href="{{url_for('static', filename='css/layouts/register.css')}}" rel="stylesheet" />
 <div class="register-page">
     <img src="{{url_for('static',filename='images/login-icon.png')}}" class="background-image" />
+    <p id="verifpd" hidden>{{verifp}}</p>
+    <script src="static/js/failverif.js"></script>
     <div class="register-box center">
         <p class="register-title">Register</p>
         <!-- might need change later for the action?? idk -->

@@ -34,6 +34,8 @@
     width: 80%;
     border-radius: 10px;
 
+    @include child_margin_vert(1em, true);
+
     &__summary{
         display: flex;
         align-items: center;
@@ -49,11 +51,18 @@
     }
 
     &__box{
+        width: min-content;
+        max-width: 100%;
+        margin-inline: auto;
+
         display: grid;
         grid-auto-flow: column;
-        overflow-x: auto;
-        scrollbar-color: $button-orange $section-lightgray; //firefox
+        grid-auto-columns: 12em;
         gap: 1em;
+
+        overflow-x: auto;
+
+        scrollbar-color: $button-orange $section-lightgray; //firefox
         // chrome
         &::-webkit-scrollbar{
             background-color: $section-lightgray;
@@ -69,5 +78,4 @@
 
 .entry{
     @include item;
-    margin: 1em auto;
 }

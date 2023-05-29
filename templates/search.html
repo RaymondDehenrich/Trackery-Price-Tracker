@@ -10,7 +10,12 @@
   />
 
   <div class="search__content">
-    <form id="search" class="search__barcontainer" action="{{url_for('search')}}" method="GET">
+    <form
+      id="search"
+      class="search__barcontainer"
+      action="{{url_for('search')}}"
+      method="GET"
+    >
       <input
         type="text"
         name="query"
@@ -27,10 +32,8 @@
         />
         <div class="result__text">Average Price: 50000000</div>
       </div>
-      <div class="result__box">
-        <div class="result__empty">
-          Nothing to see here. search to start your journey.
-        </div>
+      <div class="result__empty">
+        Nothing to see here. search to start your journey.
       </div>
     </form>
 
@@ -95,7 +98,6 @@
         </div>
       </div>
     </form>
-
   </div>
 </div>
 {% endblock %}

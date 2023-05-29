@@ -33,7 +33,7 @@ def register():
 def user_to_db(email,password,username):
     with engine.connect() as conn:
         sql = conn.execute(text(f"insert into User (email, username, password) VALUES('{email}', '{username}', md5('{password}'));"))
-        
+
 def email_check(em):
     with engine.connect() as conn:
         sql = conn.execute(text(f"select email from User WHERE email = '{em}'"))
@@ -52,15 +52,17 @@ def send_data():
     bb = email_check(email)
     if not bb:
         user_to_db(email,password,username)
-        return render_template('send_data.html',page_name = page)  
+        return render_template('send_data.html',page_name = page)
     else:
         return render_template('send_failed.html',page_name = "send_failed")
-    
+
 @app.route('/send_failed', methods = ['GET','POST'])
 def fail_send():
     recompile_sass()
     page_name = "send_failed"
     return render_template('register.html',page_name = page_name)
+
+
 #Note, Will also need a /logout route for logging out, i think a html page still needed? idk need further research.
 
 #Will need integration with user, for example, the link should be like /history/<username> or something like that

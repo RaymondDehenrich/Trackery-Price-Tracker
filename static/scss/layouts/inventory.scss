@@ -25,9 +25,8 @@
 
     &__list{
         @include content-child-width;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
         gap: 2em;
     }
 }

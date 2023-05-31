@@ -14,7 +14,7 @@
       id="search"
       class="search__barcontainer"
       action="{{url_for('search')}}"
-      method="GET"
+      method="POST"
     >
       <input
         type="text"
@@ -32,8 +32,58 @@
         />
         <div class="result__text">Average Price: 50000000</div>
       </div>
-      <div class="result__empty">
-        Nothing to see here. search to start your journey.
+      <div class="result__box">
+        <div class="entry">
+          <img
+            class="entry__img"
+            src= {{imglink1}}
+          />
+          <div class="entry__name">{{name1}}</div>
+          <div class="entry__price">{{price1}}</div>
+          <a href="{{link1}}" class="entry__firstbutton">Visit Page</a>
+          <!-- <a button class="entry__firstbutton">Visit Page</button> -->
+          <button class="entry__secondbutton">Add Tracking</button>
+        </div>
+        <div class="entry">
+          <img
+            class="entry__img"
+            src= {{imglink2}}
+          />
+          <div class="entry__name">{{name2}}</div>
+          <div class="entry__price">{{price2}}</div>
+          <a href="{{link2}}" class="entry__firstbutton">Visit Page</a>
+          <button class="entry__secondbutton">Add Tracking</button>
+        </div>
+        <div class="entry">
+          <img
+            class="entry__img"
+            src= {{imglink3}}
+          />
+          <div class="entry__name">{{name3}}</div>
+          <div class="entry__price">{{price3}}</div>
+          <a href="{{link3}}" class="entry__firstbutton">Visit Page</a>
+          <button class="entry__secondbutton">Add Tracking</button>
+        </div>
+        <div class="entry">
+          <img
+            class="entry__img"
+            src= {{imglink4}}
+          />
+          <div class="entry__name">{{name4}}</div>
+          <div class="entry__price">{{price4}}</div>
+          <a href="{{link4}}" class="entry__firstbutton">Visit Page</a>
+          <button class="entry__secondbutton">Add Tracking</button>
+        </div>
+        <div class="entry">
+          <img
+            class="entry__img"
+            src= {{imglink5}}
+          />
+          <div class="entry__name">{{name5}}</div>
+          <div class="entry__price">{{price5}}</div>
+          <a href="{{link5}}" class="entry__firstbutton">Visit Page</a>
+          <button class="entry__secondbutton">Add Tracking</button>
+        </div>
       </div>
     </form>
 

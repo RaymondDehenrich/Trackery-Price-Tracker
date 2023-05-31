@@ -6,6 +6,7 @@ from scripts.scraper import *
 from database import engine
 from sqlalchemy.sql import text
 import sass
+import tokpedscrape
 
 app = Flask(__name__)
 
@@ -97,13 +98,42 @@ def history():
     ]
     return render_template('history.html',history_list=history_list)
 
+def searchTokopedia(query):
+    newscrape = tokpedscrape.scrapeTokopedia(query)
+    return newscrape
 
-@app.route('/search',methods=['GET'])
+@app.route('/search',methods=['GET', 'POST'])
 def search():
     recompile_sass()
     page_name = "search"
-    return render_template("search.html", page_name=page_name)
+    abc = request.values.get('query')
+    hasil = searchTokopedia(abc)
+    links = []
+    images = []
+    names = []
+    prices = []
+    for items in hasil:
+        links.append(items['link'])
+        images.append(items['img_src'])
+        names.append(items['name'])
+        prices.append(items['price'])
+    print(len(links))
+    if not abc:
+        return render_template("search_empty.html", page_name=page_name)
+    else:
+        print(abc)
+        return render_template("search.html", page_name=page_name, query = abc,
+                               name1 = names[0], name2 = names[1], name3 = names[2], name4 = names[3], name5 = names[4],
+                               price1 = prices[0], price2 = prices[1], price3 = prices[2], price4 = prices[3], price5 = prices[4],
+                               imglink1 = images[0], imglink2 = images[1], imglink3 = images[2], imglink4 = images[3], imglink5 = images[4],
+                               link1 = links[0], link2 = links[1], link3 = links[2], link4 = links[3], link5 = links[4]
+                               )
 
+@app.route('/search_empty', methods = ['GET', 'POST'])
+def search_empty():
+    recompile_sass()
+    page_name = "search_empty"
+    return render_template("search_empty.html", page_name=page_name)
 
 @app.route('/inventory',methods=['GET'])
 def inventory():
@@ -136,6 +166,9 @@ if __name__ == "__main__":
     recompile_sass()
     '''BUAT RUN KE WEB'''
     app.run(host='0.0.0.0',debug=True)
+
+
+
 
 
 

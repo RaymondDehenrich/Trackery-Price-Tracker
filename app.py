@@ -113,16 +113,17 @@ def search():
     page_name = "search"
     abc = request.values.get('query')
     hasil = searchTokopedia(abc)
-    links = []
-    images = []
-    names = []
-    prices = []
-    for items in hasil:
-        links.append(items['link'])
-        images.append(items['img_src'])
-        names.append(items['name'])
-        prices.append(items['price'])
-    print(len(links))
+    if(abc):
+        links = []
+        images = []
+        names = []
+        prices = []
+        for items in hasil:
+            links.append(items['link'])
+            images.append(items['img_src'])
+            names.append(items['name'])
+            prices.append(items['price'])
+    #print(len(links))
     hasil1 = searchLazada(abc)
     links1 = []
     images1 = []
@@ -134,14 +135,15 @@ def search():
         names1.append(items['namee'])
         prices1.append(items['pricee'])
     if not abc:
-        return render_template("search_empty.html", page_name=page_name)
+        return render_template("search.html", page_name=page_name, notcheck = "yes")
     else:
         print(abc)
-        return render_template("search.html", page_name=page_name, query = abc,
+        return render_template("search.html", page_name=page_name, checked = "yes",query = abc,
                                name1 = names[0], name2 = names[1], name3 = names[2], name4 = names[3], name5 = names[4],
                                price1 = prices[0], price2 = prices[1], price3 = prices[2], price4 = prices[3], price5 = prices[4],
                                imglink1 = images[0], imglink2 = images[1], imglink3 = images[2], imglink4 = images[3], imglink5 = images[4],
-                               link1 = links[0], link2 = links[1], link3 = links[2], link4 = links[3], link5 = links[4],namee1 = names1[0], namee2 = names1[1], namee3 = names1[2], namee4 = names1[3], namee5 = names1[4],
+                               link1 = links[0], link2 = links[1], link3 = links[2], link4 = links[3], link5 = links[4],
+                               namee1 = names1[0], namee2 = names1[1], namee3 = names1[2], namee4 = names1[3], namee5 = names1[4],
                                pricee1 = prices1[0], pricee2 = prices1[1], pricee3 = prices1[2], pricee4 = prices1[3], pricee5 = prices1[4],
                                imglinke1 = images1[0], imglinke2 = images1[1], imglinke3 = images1[2], imglinke4 = images1[3], imglinke5 = images1[4],
                                linke1 = links1[0], linke2 = links1[1], linke3 = links1[2], linke4 = links1[3], linke5 = links1[4]

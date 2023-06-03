@@ -1,4 +1,4 @@
-from flask import Flask, render_template,jsonify,request
+from flask import Flask, render_template, jsonify, request, session, flash
 import schedule
 import time
 from scripts.linear_reg_pred import *
@@ -10,6 +10,7 @@ import tokpedscrape
 import lazadascrape
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'djasdasjdabakbfabhfibaif    '
 
 def recompile_sass():
     sass.compile(dirname=('static/scss', 'static/css'))
@@ -20,17 +21,37 @@ def home():
     page_name="home"
     return render_template('home.html',page_name=page_name)
 
-@app.route('/login', methods=['GET','POST'])
+# @app.route('/login', methods=['GET','POST'])
+# def login():
+#     recompile_sass()
+#     page_name="login"
+#     return render_template('login.html',page_name=page_name)
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     recompile_sass()
-    page_name="login"
-    return render_template('login.html',page_name=page_name)
+    page_name = "login"
+
+    if request.method == 'POST':
+        email = request.form['register-email']
+        password = request.form['register-password']
+
+        # cek email sm password di database
+        if email_check(email) and pass_check(password):
+            # di redirect ke login
+            session['email'] = email
+            return render_template('login.html', page_name=page_name)
+        else:
+            # fail, login ulang
+            flash('Invalid email or password. Please try again.', 'error')
+            return render_template('login.html', page_name=page_name)
+    return render_template('login.html', page_name=page_name)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
     recompile_sass()
     page_name="register"
-    return render_template('register.html',page_name=page_name, verifp = 0)
+    return render_template('register.html', page_name=page_name, verifp = 0)
 
 def user_to_db(email,password,username):
     with engine.connect() as conn:
@@ -43,6 +64,14 @@ def email_check(em):
         for row in sql.all():
             emailvalid.append(row._mapping['email'])
         return emailvalid
+    
+def pass_check(pas):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select password from User WHERE password = '{pas}"))
+        passvalid = []
+        for row in sql.all():
+            passvalid.append(row._mapping['password'])
+        return passvalid
 
 @app.route('/send_data', methods = ['POST'])
 def send_data():

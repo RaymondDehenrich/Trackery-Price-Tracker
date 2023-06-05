@@ -37,16 +37,26 @@
       <i class="fa fa-regular fa-circle-user"></i>
     </button>
 
-    <!-- will need some user integration check here, if logged in, then dropdown-menu A, else menu B. -->
-    <!-- will still also need to add the second dropdown-menu -->
+    <!--User integration here done-->
+    {% if 'email' in session %}
     <div class="dropdown__box" id="profile">
       <div>
         <i class="fa fa-regular fa-circle-user dropdown__logo"></i>
       </div>
-      <div class="dropdown__name">{{name}}</div>
+      <div class="dropdown__name">{{session['email']}}</div>
+      <div class="dropdown__line"></div>
+      <a href="{{url_for('logout')}}" class="dropdown__register"><i class="fa fa-sign-out dropdown__signoutlogo"></i>Sign Out</a>
+    </div>
+    {% else %}
+    <div class="dropdown__box" id="profile">
+      <div>
+        <i class="fa fa-regular fa-circle-user dropdown__logo"></i>
+      </div>
+      <div class="dropdown__name">Guest</div>
       <div class="dropdown__line"></div>
       <a href="{{url_for('login')}}" class="dropdown__login">Sign In</a>
       <a href="{{url_for('register')}}" class="dropdown__register">Register</a>
     </div>
+    {% endif %}
   </div>
 </nav>

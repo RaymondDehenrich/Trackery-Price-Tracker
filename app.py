@@ -23,6 +23,13 @@ def home():
     page_name="home"
     return render_template('home.html', page_name=page_name)
 
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for("home"))
+
+
 # @app.route('/login', methods=['GET','POST'])
 # def login():
 #     recompile_sass()

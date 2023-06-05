@@ -88,6 +88,9 @@
         @include icon-style;
         padding: 0px;
     }
+    &__signoutlogo{
+        padding-right: 5%;
+    }
     &__line{
         height: 1px;
         background-color: $text-gray;

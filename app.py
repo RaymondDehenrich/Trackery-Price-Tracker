@@ -8,12 +8,17 @@ from sqlalchemy.sql import text
 import sass
 import tokpedscrape
 import lazadascrape
+import hashlib
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'djasdasjdabakbfabhfibaif    '
 
 @app.route('/')
 def home():
+    # if 'email' in session:
+    #     print(session['email'])
+    # else:
+    #     print("none")
     recompile_sass()
     page_name="home"
     return render_template('home.html', page_name=page_name)
@@ -30,12 +35,26 @@ def login():
     page_name = "login"
     return render_template('login.html', page_name=page_name)
 
+def pass_check(em):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select password from User WHERE email= '{em}'"))
+        passvalid = []
+        for row in sql.all():
+            passvalid.append(row._mapping['password'])
+        return passvalid
+
 @app.route('/login/form', methods=['POST'])
 def loginform():
     email = request.form.get('login-email')
     password = request.form.get('login-password')
+    #encode password
+    pass_encode =hashlib.md5(password.encode())
+    pass_final = pass_encode.hexdigest()
+    # print(pass_final)
+    # print(pass_check(email)[0])
     # cek email sm password di database
-    if email_check(email):
+    if email_check(email) and (pass_final == pass_check(email)[0]):
+        #cek password
         # di redirect ke login
         session['email'] = email
         return redirect(url_for("home"))
@@ -146,14 +165,6 @@ def email_check(em):
         for row in sql.all():
             emailvalid.append(row._mapping['email'])
         return emailvalid
-
-def pass_check(pas):
-    with engine.connect() as conn:
-        sql = conn.execute(text(f"select password from User WHERE password = '{pas}'"))
-        passvalid = []
-        for row in sql.all():
-            passvalid.append(row._mapping['password'])
-        return passvalid
 
 
 #for /search route, might want to have data = request.form.get('home-search'),

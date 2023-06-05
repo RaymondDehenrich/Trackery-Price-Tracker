@@ -4,6 +4,7 @@
     @include button;
     width: 80%;
     color: $text-white;
+    text-decoration: none;
 }
 
 @mixin item{
@@ -17,17 +18,21 @@
         width: 100%;
         background-color: $section-lightgray;
         margin-top: 0px !important;
+        aspect-ratio: 1;
+        object-fit: contain;
     }
 
     &__firstbutton{
         @include item-button;
         background-color: $button-blue;
         margin-inline: auto;
+        justify-self: flex-end;
     }
 
     &__secondbutton{
         @include item-button;
         background-color: $button-orange;
         margin-inline: auto;
+        justify-self: flex-end;
     }
 }

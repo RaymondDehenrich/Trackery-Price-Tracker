@@ -97,13 +97,15 @@
         background-color: $button-orange;
         color: $text-white;
         text-decoration: none;
-        width: 100px;
+        width: 100%;
+        min-width: 100px;
     }
     &__register{
         @include button;
         background-color: $button-blue;
         color: $text-white;
         text-decoration: none;
-        width: 100px;
+        width: 100%;
+        min-width: 100px;
     }
 }

@@ -11,7 +11,7 @@ driver_path = './chromedriver.exe'
 browser = webdriver.Chrome(executable_path=driver_path, options=chrome_options)
 
 
-def scrapeTokopedia(name):
+def scrapeTokopedia(name) -> list[dict]:
     if name:
         url = 'https://www.tokopedia.com/search?st=product&q='+name
         headers = { 

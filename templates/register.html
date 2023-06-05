@@ -4,13 +4,13 @@
 <div class="register-page">
     <img src="{{url_for('static',filename='images/login-icon.png')}}" class="background-image" />
     <p id="verifpd" hidden>{{verifp}}</p>
-    <script src="static/js/failverif.js"></script>
+    <script src="/static/js/failverif.js"></script>
     <div class="register-box center">
         <p class="register-title">Register</p>
         <!-- might need change later for the action?? idk -->
         <!-- i think validation still error? for now only make sure not empty validation
         this is user integration to do. lmao good luck -->
-        <form id="register-input" onsubmit="return validateRegister()" action="/send_data" method="POST" class="register-form">
+        <form id="register-input" onsubmit="return validateRegister()" action="/register/form" method="POST" class="register-form">
             <p class="register-text-1">Email</p>
             <input type="text" name="register-email" class="form-control register-email" aria-label="Email" aria-describedby="basic-addon1">
             <p class="register-text-2">Username</p>

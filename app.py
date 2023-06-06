@@ -118,7 +118,7 @@ def search():
     recompile_sass()
     abc = request.values.get('query')
     tokopedia = searchTokopedia(abc) if abc else dict()
-    lazada = dict()#searchLazada(abc) if abc else dict()
+    lazada = searchLazada(abc) if abc else dict()
     return render_template("search.html", tokopedia=tokopedia, lazada=lazada)
 
 @app.route('/inventory')
@@ -203,7 +203,6 @@ def email_check(em):
         for row in sql.all():
             emailvalid.append(row._mapping['email'])
         return emailvalid
-
 
 #for /search route, might want to have data = request.form.get('home-search'),
 # so that user can directly start search on home and redirect to /search

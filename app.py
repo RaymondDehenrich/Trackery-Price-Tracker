@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, session, flash, redirect, url_for
+from flask import Flask, render_template, jsonify, request, session, flash, redirect, url_for, make_response
 import schedule
 import time
 from scripts.linear_reg_pred import *
@@ -30,7 +30,7 @@ def login(success=None):
     if "email" in session: # auth
         return redirect(url_for("home"))
     recompile_sass()
-    return render_template('login.html', success= success=="success")
+    return render_template('login.html', success = success=="success")
 
 def pass_check(em):
     with engine.connect() as conn:
@@ -62,26 +62,65 @@ def loginform():
         flash('Invalid email or password. Please try again.', 'error')
         return redirect(url_for("login/success"))
 
-@app.route('/register')
-def register():
+@app.route('/register/')
+@app.route('/register/<code>')
+def register(code=None):
     if "email" in session: # auth
         return redirect(url_for("home"))
     recompile_sass()
-    return render_template('register.html', verifp = 0)
+    return render_template('register.html', code=code)
 
 @app.route('/register/form', methods=['POST'])
 def registerform():
     if "email" in session: # auth
         return redirect(url_for("home"))
-    email = request.form['register-email']
-    password = request.form['register-password']
-    username = request.form['register-username']
-    bb = email_check(email)
-    if not bb:
+
+    email = request.form['email']
+    username = request.form['username']
+    password = request.form['password']
+    confirmpassword = request.form['confirmpassword']
+    terms = "terms" in request.form and request.form["terms"] == "on"
+    privacy = "privacy" in request.form and request.form["privacy"] == "on"
+
+    validation_result = validation(email, username, password, confirmpassword, terms, privacy)
+    if validation_result != "ok":
+        return redirect(url_for("register", code=validation_result))
+    else:
         user_to_db(email,password,username)
         return redirect(url_for("login", success = "success"))
-    else:
-        return redirect(url_for("register", fail=1))
+
+# AJAX di JS
+@app.route('/register/form/validation', methods=['POST'])
+def registerformvalidation():
+    email = request.form['email']
+    username = request.form['username']
+    password = request.form['password']
+    confirmpassword = request.form['confirmpassword']
+    terms = "terms" in request.form and request.form["terms"] == "on"
+    privacy = "privacy" in request.form and request.form["privacy"] == "on"
+
+    response = make_response(
+        validation(email, username, password, confirmpassword, terms, privacy),
+        200
+    )
+    response.mimetype = "text/plain"
+    return response
+
+def validation(email, username, password, confirmpassword, terms, privacy):
+    if not len(email) or not len(username) or not len(password) or not len(confirmpassword):
+        return "blank"
+    if not terms or not privacy:
+        return "accept"
+    if not email.endswith("@gmail.com"):
+        return "email"
+    if len(password) < 5:
+        return "pwlen"
+    if password != confirmpassword:
+        return "pwmismatch"
+    if len(email_check(email)):
+        return "dupeemail"
+    return "ok"
+
 
 @app.route('/search')
 def search():

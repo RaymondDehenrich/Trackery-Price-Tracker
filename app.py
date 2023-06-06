@@ -160,6 +160,7 @@ def add_to_db_fromlazada(index):
 @app.route('/search')
 def search():
     client_dict.clear()
+    client_dict_lazada.clear()
     recompile_sass()
     page_name = "search"
     abc = request.values.get('query')

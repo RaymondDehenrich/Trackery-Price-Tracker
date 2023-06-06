@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+
+<script src="{{url_for('static',filename='js/register.js')}}"></script>
+
 <link href="{{url_for('static', filename='css/layouts/register.css')}}" rel="stylesheet" />
 <div class="register-page">
     <img src="{{url_for('static',filename='images/login-icon.png')}}" class="background-image" />

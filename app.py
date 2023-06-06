@@ -21,7 +21,7 @@ def home():
     #     print("none")
     recompile_sass()
     page_name="home"
-    return render_template('home.html', page_name=page_name)
+    return render_template('home.html')
 
 
 @app.route('/logout')
@@ -40,7 +40,7 @@ def logout():
 def login():
     recompile_sass()
     page_name = "login"
-    return render_template('login.html', page_name=page_name)
+    return render_template('login.html')
 
 def pass_check(em):
     with engine.connect() as conn:
@@ -74,7 +74,7 @@ def loginform():
 def register():
     recompile_sass()
     page_name="register"
-    return render_template('register.html', page_name=page_name, verifp = 0)
+    return render_template('register.html', verifp = 0)
 
 @app.route('/register/form', methods=['POST'])
 def registerform():
@@ -96,18 +96,17 @@ def search():
     abc = request.values.get('query')
     tokopedia = searchTokopedia(abc) if abc else dict()
     lazada = dict()#searchLazada(abc) if abc else dict()
-    return render_template("search.html", page_name=page_name, query = abc, tokopedia=tokopedia, lazada=lazada)
+    return render_template("search.html", tokopedia=tokopedia, lazada=lazada)
 
-@app.route('/inventory',methods=['GET'])
+@app.route('/inventory')
 def inventory():
     recompile_sass()
-    page_name = "inventory"
-    return render_template("inventory.html", page_name=page_name)
+    return render_template("inventory.html")
 
 @app.route('/detail', methods = ['GET'])
 def detail():
     recompile_sass()
-    return render_template('detail.html',page_name = "detail")
+    return render_template('detail.html')
 
 
 #Note, Will also need a /logout route for logging out, i think a html page still needed? idk need further research.

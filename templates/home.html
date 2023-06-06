@@ -1,4 +1,15 @@
 {% extends "base.html" %} {% block content %}
+<script>
+  $(document).ready(function() {
+    $('#home-input').on('submit', function(event) {
+      var inputValue = $('input[name="home-search"]').val();
+      if (inputValue.trim() === '') {
+        event.preventDefault();
+      }
+    });
+  });
+  </script>
+
 <link
   href="{{url_for('static', filename='css/layouts/home.css')}}"
   rel="stylesheet"

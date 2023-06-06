@@ -32,14 +32,6 @@ def login(success=None):
     recompile_sass()
     return render_template('login.html', success = success=="success")
 
-def pass_check(em):
-    with engine.connect() as conn:
-        sql = conn.execute(text(f"select password from User WHERE email= '{em}'"))
-        passvalid = []
-        for row in sql.all():
-            passvalid.append(row._mapping['password'])
-        return passvalid
-
 @app.route('/login/form', methods=['POST'])
 def loginform():
     if "email" in session: # auth
@@ -89,7 +81,7 @@ def registerform():
         user_to_db(email,password,username)
         return redirect(url_for("login", success = "success"))
 
-# AJAX di JS
+# Buat JS
 @app.route('/register/form/validation', methods=['POST'])
 def registerformvalidation():
     email = request.form['email']
@@ -120,7 +112,6 @@ def validation(email, username, password, confirmpassword, terms, privacy):
     if len(email_check(email)):
         return "dupeemail"
     return "ok"
-
 
 @app.route('/search')
 def search():
@@ -180,6 +171,15 @@ def history():
         }
     ]
     return render_template('history.html',history_list=history_list)
+
+
+def pass_check(em):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select password from User WHERE email= '{em}'"))
+        passvalid = []
+        for row in sql.all():
+            passvalid.append(row._mapping['password'])
+        return passvalid
 
 def searchTokopedia(query):
     newscrape = tokpedscrape.scrapeTokopedia(query)

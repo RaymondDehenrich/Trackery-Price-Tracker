@@ -33,13 +33,15 @@
         <div class="result__text">Average Price: 50000000</div>
       </div>
       <div class="result__box">
+        {% set index = namespace(value=0) %}
         {% for item in tokopedia %}
         <div class="entry">
           <img class="entry__img" src="{{item.img_src}}" />
           <div class="entry__name">{{item.name}}</div>
           <div class="entry__price">{{item.price}}</div>
           <a href="{{item.link}}" class="entry__firstbutton">Visit Page</a>
-          <button class="entry__secondbutton">Add Tracking</button>
+          <a href="{{url_for('searchindex', query = query, index = index.value)}}" class = "entry__secondbutton">Add Tracking</a>
+          {% set index.value = index.value + 1 %}
         </div>
         {% endfor %}
       </div>
@@ -59,13 +61,15 @@
         <div class="result__text">Average Price: 50000000</div>
       </div>
       <div class="result__box">
+        {% set index2 = namespace(value=0) %}
         {% for item in lazada %}
         <div class="entry">
           <img class="entry__img" src="{{item.img_src}}" />
           <div class="entry__name">{{item.name}}</div>
           <div class="entry__price">{{item.price}}</div>
           <a href="{{item.link}}" class="entry__firstbutton">Visit Page</a>
-          <button class="entry__secondbutton">Add Tracking</button>
+          <a href="{{url_for('searchindexlaz', query = query, index = index2.value)}}" class = "entry__secondbutton">Add Tracking</a>
+          {% set index2.value = index2.value + 1 %}
         </div>
         {% endfor %}
       </div>

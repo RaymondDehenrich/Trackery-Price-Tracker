@@ -1,14 +1,14 @@
 {% extends "base.html" %} {% block content %}
 <script>
-  $(document).ready(function() {
-    $('#home-input').on('submit', function(event) {
-      var inputValue = $('input[name="home-search"]').val();
-      if (inputValue.trim() === '') {
+  $(document).ready(function () {
+    $("#search").on("submit", function (event) {
+      var inputValue = $('input[name="query"]').val();
+      if (inputValue.trim() === "") {
         event.preventDefault();
       }
     });
   });
-  </script>
+</script>
 
 <link
   href="{{url_for('static', filename='css/layouts/home.css')}}"
@@ -42,7 +42,6 @@
         placeholder="Start your Journey"
       />
     </form>
-
   </div>
 </div>
 {% endblock %}

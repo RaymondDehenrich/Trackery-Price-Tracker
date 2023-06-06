@@ -15,12 +15,7 @@ app.config['SECRET_KEY'] = 'djasdasjdabakbfabhfibaif    '
 
 @app.route('/')
 def home():
-    # if 'email' in session:
-    #     print(session['email'])
-    # else:
-    #     print("none")
     recompile_sass()
-    page_name="home"
     return render_template('home.html')
 
 
@@ -28,13 +23,6 @@ def home():
 def logout():
     session.clear()
     return redirect(url_for("home"))
-
-
-# @app.route('/login', methods=['GET','POST'])
-# def login():
-#     recompile_sass()
-#     page_name="login"
-#     return render_template('login.html',page_name=page_name)
 
 @app.route('/login')
 def login():
@@ -73,7 +61,6 @@ def loginform():
 @app.route('/register')
 def register():
     recompile_sass()
-    page_name="register"
     return render_template('register.html', verifp = 0)
 
 @app.route('/register/form', methods=['POST'])
@@ -103,7 +90,7 @@ def inventory():
     recompile_sass()
     return render_template("inventory.html")
 
-@app.route('/detail', methods = ['GET'])
+@app.route('/detail')
 def detail():
     recompile_sass()
     return render_template('detail.html')

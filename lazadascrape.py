@@ -10,7 +10,7 @@ driver_path = './chromedriver.exe'
 
 browser = webdriver.Chrome(executable_path=driver_path, options=chrome_options)
 
-def scrapeLazada(query):
+def scrapeLazada(query) -> list[dict]:
     chrome_options = Options()
     chrome_options.add_argument("--headless")
 
@@ -35,7 +35,7 @@ def scrapeLazada(query):
     product_items = soup.find_all('div', {'class': 'Bm3ON'})
     products = []
     #print(product_items)
-    
+
     for product_item in product_items:
         #print(product_item)
         img = product_item.find('img',{'class':'jBwCF'})['src']

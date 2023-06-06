@@ -5,6 +5,11 @@
   rel="stylesheet"
 />
 
+{% if success %}
+<script>
+  $(document).ready(() => alert("Registration successful, you can log-in using your new account now."));
+</script>
+{% endif %}
 
 <div class="login-page">
   <img
@@ -59,5 +64,4 @@
     <a class="login-text-6" href="{{url_for('register')}}">Register</a>
   </div>
 </div>
-
 {% endblock %}

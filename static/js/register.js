@@ -25,6 +25,4 @@ function validateRegister(){
         alert("Password and confirm password is not the same");
         return false;
     }
-    //need further integration here, like email availability check, addding to database, 
-    //password hashing, etc. i think hashing done in the .py and not here
 }

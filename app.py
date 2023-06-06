@@ -24,11 +24,13 @@ def logout():
     session.clear()
     return redirect(url_for("home"))
 
-@app.route('/login')
-def login():
+@app.route('/login/')
+@app.route('/login/<success>')
+def login(success=None):
+    if "email" in session: # auth
+        return redirect(url_for("home"))
     recompile_sass()
-    page_name = "login"
-    return render_template('login.html')
+    return render_template('login.html', success= success=="success")
 
 def pass_check(em):
     with engine.connect() as conn:
@@ -40,6 +42,8 @@ def pass_check(em):
 
 @app.route('/login/form', methods=['POST'])
 def loginform():
+    if "email" in session: # auth
+        return redirect(url_for("home"))
     email = request.form.get('login-email')
     password = request.form.get('login-password')
     #encode password
@@ -56,30 +60,32 @@ def loginform():
     else:
         # fail, login ulang
         flash('Invalid email or password. Please try again.', 'error')
-        return redirect(url_for("login"))
+        return redirect(url_for("login/success"))
 
 @app.route('/register')
 def register():
+    if "email" in session: # auth
+        return redirect(url_for("home"))
     recompile_sass()
     return render_template('register.html', verifp = 0)
 
 @app.route('/register/form', methods=['POST'])
 def registerform():
-    page = "send_data"
+    if "email" in session: # auth
+        return redirect(url_for("home"))
     email = request.form['register-email']
     password = request.form['register-password']
     username = request.form['register-username']
     bb = email_check(email)
     if not bb:
         user_to_db(email,password,username)
-        return render_template('send_data.html',page_name = page)
+        return redirect(url_for("login", success = "success"))
     else:
-        return render_template('register.html',page_name = "register", verifp = 1)
+        return redirect(url_for("register", fail=1))
 
 @app.route('/search')
 def search():
     recompile_sass()
-    page_name = "search"
     abc = request.values.get('query')
     tokopedia = searchTokopedia(abc) if abc else dict()
     lazada = dict()#searchLazada(abc) if abc else dict()

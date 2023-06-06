@@ -113,13 +113,93 @@ def validation(email, username, password, confirmpassword, terms, privacy):
         return "dupeemail"
     return "ok"
 
+def add_item_temp(name, image, link, price, id):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"insert INTO item_temp(itemname, image, link, Latest_price, UserId) VALUES('{name}' ,'{image}', '{link}','{price}','{id}');"))
+
+def add_item_real(name, image, link, price, id):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"insert INTO item(name, image, link, Latest_price, UserId) VALUES('{name}' ,'{image}', '{link}','{price}','{id}');"))
+
+def check_email_userid(email):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select userid from User where email = '{email}';"))
+        id = []
+        for row in sql.all():
+            id.append(row._mapping['userid'])
+        return id
+    
+client_dict = []
+client_dict_lazada = []
+def add_to_client(item):
+    global client_dict
+    client_dict = item
+
+def add_to_client_lazada(item):
+    global client_dict_lazada
+    client_dict_lazada = item
+
+def add_to_db(index):
+    print("index",index)
+    print("tokped")
+    item = client_dict[index]
+    price = item['price']
+    price = price[2:]
+    int_price = int(price.replace('.',''))
+    add_item_real(item['name'], item['img_src'], item['link'], int_price, check_email_userid(session['email'])[0])
+
+def add_to_db_fromlazada(index):
+    print("index",index)
+    item = client_dict_lazada[index]
+    print("lazada dict", )
+    price = item['price']
+    price = price[2:]
+    int_price = int(price.replace('.',''))
+    add_item_real(item['name'], item['img_src'], item['link'], int_price, check_email_userid(session['email'])[0])
+
 @app.route('/search')
 def search():
+    client_dict.clear()
     recompile_sass()
+    page_name = "search"
     abc = request.values.get('query')
     tokopedia = searchTokopedia(abc) if abc else dict()
+    add_to_client(tokopedia)
     lazada = searchLazada(abc) if abc else dict()
-    return render_template("search.html", tokopedia=tokopedia, lazada=lazada)
+    add_to_client_lazada(lazada)
+    return render_template("search.html", tokopedia=tokopedia, query = abc, lazada=lazada)
+
+@app.route('/search?query=<query>/<int:index>')
+def searchindex(query, index):
+    recompile_sass()
+    print("ini tokped: ")
+    add_to_db(index)
+    client_dict.clear()
+    client_dict_lazada.clear()
+    recompile_sass()
+    page_name = "search"
+    tokopedia = searchTokopedia(query) if query else dict()
+    add_to_client(tokopedia)
+    lazada = searchLazada(query) if query else dict()
+    add_to_client_lazada(lazada)
+    return render_template("search.html", page_name=page_name, query = query, tokopedia=tokopedia, lazada=lazada)
+
+@app.route('/search?query=<query>/<int:index>/laz')
+def searchindexlaz(query, index):
+    recompile_sass()
+    print("ini lazada")
+    add_to_db_fromlazada(index)
+    client_dict.clear()
+    client_dict_lazada.clear()
+    recompile_sass()
+    page_name = "search"
+    tokopedia = searchTokopedia(query) if query else dict()
+    add_to_client(tokopedia)
+    lazada = searchLazada(query) if query else dict()
+    add_to_client_lazada(lazada)
+    return render_template("search.html", page_name=page_name, query = query, tokopedia=tokopedia, lazada=lazada)
+
+
 
 @app.route('/inventory')
 def inventory():
@@ -223,6 +303,7 @@ if __name__ == "__main__":
     recompile_sass()
     '''BUAT RUN KE WEB'''
     app.run(host='0.0.0.0',debug=True)
+
 
 
 

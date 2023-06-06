@@ -13,7 +13,7 @@
 
 <script>
   async function validateRegister() {
-    const form = document.getElementById("form")
+    const form = document.getElementById("form");
     const response = await fetch(
       "{{url_for('registerformvalidation', _external=True)}}",
       {
@@ -21,8 +21,8 @@
         body: new FormData(form),
       }
     );
-    if(!response.ok || registerResponse(await response.text()) == "ok"){
-      form.submit()
+    if (!response.ok || registerResponse(await response.text()) == "ok") {
+      form.submit();
     }
   }
 </script>
@@ -72,9 +72,14 @@
         class="form-control register-confirmpassword"
         aria-label="password"
         aria-describedby="basic-addon1"
+      />
+      <input
+        type="checkbox"
+        id="terms"
+        name="terms"
+        class="register-terms"
         value="on"
       />
-      <input type="checkbox" id="terms" name="terms" class="register-terms" />
       <p class="register-text-5">Agree to Terms and Conditions</p>
       <input
         type="checkbox"

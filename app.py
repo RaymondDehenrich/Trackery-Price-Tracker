@@ -60,7 +60,7 @@ def loginform():
     else:
         # fail, login ulang
         flash('Invalid email or password. Please try again.', 'error')
-        return redirect(url_for("login/success"))
+        return redirect(url_for("login"))
 
 @app.route('/register/')
 @app.route('/register/<code>')

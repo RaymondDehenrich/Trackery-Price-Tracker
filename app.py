@@ -119,7 +119,7 @@ def add_item_temp(name, image, link, price, id):
 
 def add_item_real(name, image, link, price, id):
     with engine.connect() as conn:
-        sql = conn.execute(text(f"insert INTO item(name, image, link, Latest_price, UserId) VALUES('{name}' ,'{image}', '{link}','{price}','{id}');"))
+        sql = conn.execute(text(f"insert INTO item(itemname, image, link, Latest_price, UserId) VALUES('{name}' ,'{image}', '{link}','{price}','{id}');"))
 
 def check_email_userid(email):
     with engine.connect() as conn:
@@ -140,8 +140,6 @@ def add_to_client_lazada(item):
     client_dict_lazada = item
 
 def add_to_db(index):
-    print("index",index)
-    print("tokped")
     item = client_dict[index]
     price = item['price']
     price = price[2:]
@@ -149,9 +147,7 @@ def add_to_db(index):
     add_item_real(item['name'], item['img_src'], item['link'], int_price, check_email_userid(session['email'])[0])
 
 def add_to_db_fromlazada(index):
-    print("index",index)
     item = client_dict_lazada[index]
-    print("lazada dict", )
     price = item['price']
     price = price[2:]
     int_price = int(price.replace('.',''))
@@ -200,12 +196,21 @@ def searchindexlaz(query, index):
     add_to_client_lazada(lazada)
     return render_template("search.html", page_name=page_name, query = query, tokopedia=tokopedia, lazada=lazada)
 
+def inventory_check(email):
+    id = check_email_userid(email)
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select  itemname, image, link, latest_price  from item i JOIN User u ON i.UserID = u.UserID where u.UserID = {id[0]}"))
+        item = []
+        for row in sql.all():
+            item.append(row)
+        return item
 
 
 @app.route('/inventory')
 def inventory():
     recompile_sass()
-    return render_template("inventory.html")
+    items = inventory_check((session['email']))
+    return render_template("inventory.html", item = items)
 
 @app.route('/detail')
 def detail():
@@ -304,6 +309,8 @@ if __name__ == "__main__":
     recompile_sass()
     '''BUAT RUN KE WEB'''
     app.run(host='0.0.0.0',debug=True)
+
+
 
 
 

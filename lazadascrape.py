@@ -37,4 +37,6 @@ def scrapeLazada(query) -> list[dict]:
 		name = name_and_link.find_element(By.CSS_SELECTOR, "a").get_attribute("title")
 		price = product_item.find_element(By.CLASS_NAME, "ooOxS").get_attribute("innerHTML")
 		products.append({'link': link,'img_src': img,'name':name, 'price': price})
+
+	browser.execute_script("window.scrollBy(-1 * document.body.scrollHeight, 0);")
 	return products

@@ -21,7 +21,7 @@
         body: new FormData(form),
       }
     );
-    if (!response.ok || registerResponse(await response.text()) == "ok") {
+    if (!response.ok || registerResponse(await response.text())) {
       form.submit();
     }
   }

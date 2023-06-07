@@ -207,6 +207,19 @@ def inventory_check(email):
         for row in sql.all():
             item.append(row)
         return item
+    
+def view_itemid(email):
+    id = check_email_userid(email)
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select ItemID from item where UserID = {id[0]}"))
+        item_index = []
+        for row in sql.all():
+            item_index.append(row._mapping['ItemID'])
+        return item_index
+
+def remove_item(item_index, row_index):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"delete from item  where itemId = {item_index[row_index]}"))
 
 
 @app.route('/inventory')
@@ -218,6 +231,16 @@ def inventory():
         items = None
     return render_template("inventory.html", item = items)
 
+@app.route('/inventory/<int:index>')
+def inventorydelete(index):
+    recompile_sass()
+    if 'email' in session:
+        item_ids = view_itemid(session['email'])
+        remove_item(item_ids,index)
+        items = inventory_check((session['email']))
+    else:
+        items = None
+    return render_template("inventory.html", item = items)
 @app.route('/detail')
 def detail():
     recompile_sass()

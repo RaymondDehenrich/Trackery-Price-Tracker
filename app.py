@@ -212,7 +212,10 @@ def inventory_check(email):
 @app.route('/inventory')
 def inventory():
     recompile_sass()
-    items = inventory_check((session['email']))
+    if 'email' in session:
+        items = inventory_check((session['email']))
+    else:
+        items = None
     return render_template("inventory.html", item = items)
 
 @app.route('/detail')

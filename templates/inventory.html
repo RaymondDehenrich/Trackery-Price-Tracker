@@ -19,7 +19,7 @@
 
     <div class="line"></div>
 
-
+    {% if 'email' in session%}
     <form class="inventory__list" action="{{url_for('detail')}}">
       {% set index = namespace(value=0) %}
       {% for item in item %}
@@ -37,6 +37,9 @@
       {% endfor %}
       </div>
     </form>
+    {% else %}
+    <div><p>Please Log in to view inventory</p></div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

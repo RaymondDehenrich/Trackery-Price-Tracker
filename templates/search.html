@@ -40,7 +40,11 @@
           <div class="entry__name">{{item.name}}</div>
           <div class="entry__price">{{item.price}}</div>
           <a href="{{item.link}}" class="entry__firstbutton">Visit Page</a>
+          {% if 'email' in session %}
           <a href="{{url_for('searchindex', query = query, index = index.value)}}" class = "entry__secondbutton">Add Tracking</a>
+          {% else %}
+          <a href="#" class = "entry__secondbutton">Add Tracking</a>
+          {% endif %}
           {% set index.value = index.value + 1 %}
         </div>
         {% endfor %}

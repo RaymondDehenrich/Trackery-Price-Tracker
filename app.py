@@ -170,7 +170,10 @@ def search():
 def searchindex(query, index):
     recompile_sass()
     print("ini tokped: ")
-    add_to_db(index)
+    if 'email' in session:
+        add_to_db(index)
+    else:
+        flash("Please log in to add item",'warning')
     client_dict.clear()
     client_dict_lazada.clear()
     recompile_sass()

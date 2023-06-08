@@ -19,25 +19,26 @@
       </div>
 
       <div class="line"></div>
-
+      {% for item in item %}
       <div class="info">
         <img
           class="info__img"
-          src="{{url_for('static',filename='images/search-logo.png')}}"
+          src="{{item[2]}}"
         />
 
         <div class="info__box">
-          <div class="info__title">Ayam Goreng</div>
-          <div class="info__price">goceng</div>
+          <div class="info__title">{{item[1]}}</div>
+          <div class="info__price">Rp {{item[4]}}</div>
           <img
             class="info__graph"
             src="{{url_for('static',filename='images/plot.webp')}}"
           />
           <div class="info__buttoncontainer">
-            <button class="info__firstbutton">Visit Item</button>
-            <button class="info__secondbutton">Remove Tracking</button>
+            <a href="{{item[3]}}" class="info__firstbutton">Visit Page</a>
+            <a href="{{url_for('inventorydelete',index=indexx)}}" class = "info__secondbutton">Remove Tracking</a>
           </div>
         </div>
+        {% endfor %}
       </div>
 
       <div class="pred__title">Price Prediction</div>

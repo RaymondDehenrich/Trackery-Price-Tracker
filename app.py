@@ -241,10 +241,27 @@ def inventorydelete(index):
     else:
         items = None
     return render_template("inventory.html", item = items)
+
+
 @app.route('/detail')
 def detail():
     recompile_sass()
     return render_template('detail.html')
+
+def item_check(index):
+    item_id = view_itemid(session['email'])
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select * from item where ItemID = {item_id[index]}"))
+        item = []
+        for row in sql.all():
+            item.append(row)
+    return item
+
+@app.route('/detail/<int:index>')
+def itemdetail(index):
+    recompile_sass()
+    item_detail = item_check(index)
+    return render_template('detail.html',item = item_detail, indexx = index)
 
 
 #Note, Will also need a /logout route for logging out, i think a html page still needed? idk need further research.

@@ -4,12 +4,14 @@ import time
 from scripts.linear_reg_pred import *
 from scripts.scraper import *
 from database import engine
+import datetime
 from sqlalchemy.sql import text
 import sass
 import tokpedscrape
 import lazadascrape
 import hashlib
 
+MAX_HISTORY_ENTRIES = 7
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'djasdasjdabakbfabhfibaif    '
 
@@ -170,6 +172,14 @@ def search():
     recompile_sass()
     page_name = "search"
     abc = request.values.get('query')
+    userid = check_email_userid(session['email'])
+    
+    if abc:
+            history_to_db(abc,userid)
+            session['history_list'] = session.get('history_list', [])
+            session['history_list'].append((abc, datetime.datetime.now()))
+            if len(session['history_list']) > MAX_HISTORY_ENTRIES:
+                session['history_list'].pop(0)  # Remove the oldest entry
     tokopedia = searchTokopedia(abc) if abc else dict()
     add_to_client(tokopedia)
     lazada = searchLazada(abc) if abc else dict()
@@ -208,6 +218,11 @@ def searchindexlaz(query, index):
     lazada = searchLazada(query) if query else dict()
     add_to_client_lazada(lazada)
     return render_template("search.html", page_name=page_name, query = query, tokopedia=tokopedia, lazada=lazada)
+
+@app.route('/search_again/<abc>')
+def search_again(abc):
+    recompile_sass()
+    return redirect(url_for('search', query=abc))
 
 def inventory_check(email):
     id = check_email_userid(email)
@@ -287,39 +302,24 @@ def itemdetail(index):
 @app.route('/history')
 def history():
     recompile_sass()
+    history_list = session.get('history_list', [])
+    userid = check_email_userid(session['email'])
+    hist=show_history(userid)
+    print(hist)
+    return render_template('history.html',history_list=hist)
 
-    #added temporary list for history, should be integrated with database
+def history_to_db(name,userid):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"insert into Search_history (name,date,userid) VALUES('{name}', curdate(), '{userid[0]}')"))
 
-    #ASSUMPTION
-    #1. only have 5 variable each and every variable is filled.
-    #2. has already been sorted according to time.
-    #3. everything other than history-id is string.
-    history_list = [
-        {
-        'history-id':1,
-        'history-search':'bakso',
-        'average-price':'Rp.40.000',
-        'time': '13:20',
-        'date': '20/04/2023'
-        },
-        {
-        'history-id':2,
-        'history-search':'pangsit',
-        'average-price':'Rp.30.000',
-        'time': '13:40',
-        'date': '20/04/2025'
-        },
-        {
-        'history-id':3,
-        'history-search':'keyboard',
-        'average-price':'Rp.400.000',
-        'time': '6:50',
-        'date': '20/04/2026'
-        }
-    ]
-    return render_template('history.html',history_list=history_list)
-
-
+def show_history(userid):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select * from Search_history where userid= {userid[0]} order by Searchhistoryid DESC"))
+        hist = []
+        for row in sql.all():
+            hist.append(row)
+        return hist
+    
 def pass_check(em):
     with engine.connect() as conn:
         sql = conn.execute(text(f"select password from User WHERE email= '{em}'"))

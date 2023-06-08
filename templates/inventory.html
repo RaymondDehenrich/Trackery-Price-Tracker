@@ -30,7 +30,7 @@
         />
         <div class="entry__name">{{item[0]}}</div>
         <div class="entry__price">Rp {{item[3]}}</div>
-        <button class="entry__firstbutton">More Info</button>
+        <a href="{{url_for('itemdetail', index = index.value)}}" class = "entry__firstbutton">More info</a>
         <a href="{{url_for('inventorydelete', index = index.value)}}" class = "entry__secondbutton">Remove Tracking</a>
         {% set index.value = index.value + 1 %}
       </div>

@@ -121,6 +121,14 @@ def add_item_real(name, image, link, price, id):
     with engine.connect() as conn:
         sql = conn.execute(text(f"insert INTO item(itemname, image, link, Latest_price, UserId) VALUES('{name}' ,'{image}', '{link}','{price}','{id}');"))
 
+def add_to_item_price_history(price):
+    with engine.connect() as conn:
+        sql1 = conn.execute(text(f"select itemid from item ORDER by itemid DESC LIMIT 1"))
+        itemid = []
+        for row in sql1.all():
+            itemid.append(row._mapping['itemid'])
+        sql2 = conn.execute(text(f"INSERT INTO item_price_history (price, date, itemid) VALUES({price}, curdate(), {itemid[0]})"))
+
 def check_email_userid(email):
     with engine.connect() as conn:
         sql = conn.execute(text(f"select userid from User where email = '{email}';"))
@@ -138,13 +146,14 @@ def add_to_client(item):
 def add_to_client_lazada(item):
     global client_dict_lazada
     client_dict_lazada = item
-
+   
 def add_to_db(index):
     item = client_dict[index]
     price = item['price']
     price = price[2:]
     int_price = int(price.replace('.',''))
     add_item_real(item['name'], item['img_src'], item['link'], int_price, check_email_userid(session['email'])[0])
+    add_to_item_price_history(int_price)
 
 def add_to_db_fromlazada(index):
     item = client_dict_lazada[index]
@@ -152,6 +161,7 @@ def add_to_db_fromlazada(index):
     price = price[2:]
     int_price = int(price.replace('.',''))
     add_item_real(item['name'], item['img_src'], item['link'], int_price, check_email_userid(session['email'])[0])
+    add_to_item_price_history(int_price)
 
 @app.route('/search')
 def search():
@@ -221,6 +231,10 @@ def remove_item(item_index, row_index):
     with engine.connect() as conn:
         sql = conn.execute(text(f"delete from item  where itemId = {item_index[row_index]}"))
 
+def remove_item_from_itemhistory(item_index,row_index):
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"delete from item_price_history  where itemId = {item_index[row_index]}"))
+
 
 @app.route('/inventory')
 def inventory():
@@ -236,6 +250,7 @@ def inventorydelete(index):
     recompile_sass()
     if 'email' in session:
         item_ids = view_itemid(session['email'])
+        remove_item_from_itemhistory(item_ids,index)
         remove_item(item_ids,index)
         items = inventory_check((session['email']))
     else:

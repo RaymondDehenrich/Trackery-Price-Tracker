@@ -138,7 +138,7 @@ def check_email_userid(email):
         for row in sql.all():
             id.append(row._mapping['userid'])
         return id
-    
+
 client_dict = []
 client_dict_lazada = []
 def add_to_client(item):
@@ -148,7 +148,7 @@ def add_to_client(item):
 def add_to_client_lazada(item):
     global client_dict_lazada
     client_dict_lazada = item
-   
+
 def add_to_db(index):
     item = client_dict[index]
     price = item['price']
@@ -173,7 +173,7 @@ def search():
     page_name = "search"
     abc = request.values.get('query')
     userid = check_email_userid(session['email'])
-    
+
     if abc:
             history_to_db(abc,userid)
             session['history_list'] = session.get('history_list', [])
@@ -232,7 +232,7 @@ def inventory_check(email):
         for row in sql.all():
             item.append(row)
         return item
-    
+
 def view_itemid(email):
     id = check_email_userid(email)
     with engine.connect() as conn:
@@ -319,7 +319,7 @@ def show_history(userid):
         for row in sql.all():
             hist.append(row)
         return hist
-    
+
 def pass_check(em):
     with engine.connect() as conn:
         sql = conn.execute(text(f"select password from User WHERE email= '{em}'"))

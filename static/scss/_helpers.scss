@@ -26,6 +26,7 @@ $font-size-subtitle: 1.125rem;
   align-items: center;
   justify-content: center;
   text-align: center;
+  text-decoration: none;
 }
 
 @mixin child_margin_vert($amt, $zero_edge: false) {

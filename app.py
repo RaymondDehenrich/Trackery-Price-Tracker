@@ -10,6 +10,7 @@ import sass
 import tokpedscrape
 import lazadascrape
 import hashlib
+import pandas as pd
 
 MAX_HISTORY_ENTRIES = 7
 app = Flask(__name__)
@@ -308,11 +309,24 @@ def item_check(index):
             item.append(row)
     return item
 
+def item_predict(index):
+    item_id = view_itemid(session['email'])
+    with engine.connect() as conn:
+        sql = conn.execute(text(f"select date,price from item_price_history where ItemID = {item_id[index]} ORDER BY DATE ASC"))
+        item = []
+        for row in sql.all():
+            item.append(row)
+    return item
+
 @app.route('/detail/<int:index>')
 def itemdetail(index):
     recompile_sass()
     item_detail = item_check(index)
-    return render_template('detail.html',item = item_detail, indexx = index)
+    itempred = item_predict(index)
+    predicted_price = int(lin_reg(itempred))
+    if(predicted_price == -10 or predicted_price == -1 or predicted_price == -404):
+        predicted_price = -69
+    return render_template('detail.html',item = item_detail, indexx = index, predicted_price = predicted_price)
 
 
 #Note, Will also need a /logout route for logging out, i think a html page still needed? idk need further research.

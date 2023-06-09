@@ -13,7 +13,11 @@
 
     <div class="header">
       <div class="header__center">Tracking List</div>
+      {% if 'email' in session%}
       <div class="header__right">{{item|length}}/20</div>
+      {% else %}
+      <div class="header__right">0/20</div>
+      {% endif %}
     </div>
 
 

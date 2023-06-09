@@ -172,19 +172,27 @@ def search():
     recompile_sass()
     page_name = "search"
     abc = request.values.get('query')
-    userid = check_email_userid(session['email'])
+    #hmm, harusnya gini gpp untuk check kalo login atau ga supaya ga crash. blm di full test.
+    if 'email' in session:
+        # abc = request.values.get('query')
+        userid = check_email_userid(session['email'])
 
-    if abc:
-            history_to_db(abc,userid)
-            session['history_list'] = session.get('history_list', [])
-            session['history_list'].append((abc, datetime.datetime.now()))
-            if len(session['history_list']) > MAX_HISTORY_ENTRIES:
-                session['history_list'].pop(0)  # Remove the oldest entry
+        if abc:
+                history_to_db(abc,userid)
+                session['history_list'] = session.get('history_list', [])
+                session['history_list'].append((abc, datetime.datetime.now()))
+                if len(session['history_list']) > MAX_HISTORY_ENTRIES:
+                    session['history_list'].pop(0)  # Remove the oldest entry
     tokopedia = searchTokopedia(abc) if abc else dict()
     add_to_client(tokopedia)
     lazada = searchLazada(abc) if abc else dict()
     add_to_client_lazada(lazada)
-    return render_template("search.html", tokopedia=tokopedia, query = abc, lazada=lazada)
+
+    tokopedia_price= [float(item["price"][2:].replace(".", "")) for item in tokopedia]
+    tokopedia_avg = round(sum(tokopedia_price)/len(tokopedia_price),5) if abc else 0
+    lazada_price= [float(item["price"][2:].replace(".", "")) for item in lazada]
+    lazada_avg = round(sum(lazada_price)/len(lazada_price),5) if abc else 0
+    return render_template("search.html", tokopedia=tokopedia, query = abc, lazada=lazada,tokopedia_avg=tokopedia_avg,lazada_avg=lazada_avg)
 
 @app.route('/search?query=<query>/<int:index>')
 def searchindex(query, index):
@@ -202,13 +210,21 @@ def searchindex(query, index):
     add_to_client(tokopedia)
     lazada = searchLazada(query) if query else dict()
     add_to_client_lazada(lazada)
-    return render_template("search.html", page_name=page_name, query = query, tokopedia=tokopedia, lazada=lazada)
+    
+    tokopedia_price= [float(item["price"][2:].replace(".", "")) for item in tokopedia]
+    tokopedia_avg = round(sum(tokopedia_price)/len(tokopedia_price),5) if query else 0
+    lazada_price= [float(item["price"][2:].replace(".", "")) for item in lazada]
+    lazada_avg = round(sum(lazada_price)/len(lazada_price),5) if query else 0
+    return render_template("search.html", page_name=page_name, query = query, tokopedia=tokopedia, lazada=lazada,tokopedia_avg=tokopedia_avg,lazada_avg=lazada_avg)
 
 @app.route('/search?query=<query>/<int:index>/laz')
 def searchindexlaz(query, index):
     recompile_sass()
     print("ini lazada")
-    add_to_db_fromlazada(index)
+    if 'email' in session:
+        add_to_db_fromlazada(index)
+    else:
+        flash("Please log in to add item",'warning')
     client_dict.clear()
     client_dict_lazada.clear()
     recompile_sass()
@@ -217,7 +233,12 @@ def searchindexlaz(query, index):
     add_to_client(tokopedia)
     lazada = searchLazada(query) if query else dict()
     add_to_client_lazada(lazada)
-    return render_template("search.html", page_name=page_name, query = query, tokopedia=tokopedia, lazada=lazada)
+
+    tokopedia_price= [float(item["price"][2:].replace(".", "")) for item in tokopedia]
+    tokopedia_avg = round(sum(tokopedia_price)/len(tokopedia_price),5) if query else 0
+    lazada_price= [float(item["price"][2:].replace(".", "")) for item in lazada]
+    lazada_avg = round(sum(lazada_price)/len(lazada_price),5) if query else 0
+    return render_template("search.html", page_name=page_name, query = query, tokopedia=tokopedia, lazada=lazada,tokopedia_avg=tokopedia_avg,lazada_avg=lazada_avg)
 
 @app.route('/search_again/<abc>')
 def search_again(abc):
@@ -302,10 +323,13 @@ def itemdetail(index):
 @app.route('/history')
 def history():
     recompile_sass()
-    history_list = session.get('history_list', [])
-    userid = check_email_userid(session['email'])
-    hist=show_history(userid)
-    print(hist)
+    hist=[]
+    if 'email' in session:
+        #sepertinya ini ga kepake?
+        # history_list = session.get('history_list', [])
+        userid = check_email_userid(session['email'])
+        hist=show_history(userid)
+    # print(hist)
     return render_template('history.html',history_list=hist)
 
 def history_to_db(name,userid):

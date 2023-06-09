@@ -29,10 +29,12 @@
         <div class="info__box">
           <div class="info__title">{{item[1]}}</div>
           <div class="info__price">Rp {{item[4]}}</div>
+          {% if predicted_price != -69 %}
           <img
             class="info__graph"
-            src="{{url_for('static',filename='images/plot.webp')}}"
+            src="{{url_for('static',filename='images/plot.png')}}"
           />
+          {% endif %}
           <div class="info__buttoncontainer">
             <a href="{{item[3]}}" class="info__firstbutton">Visit Page</a>
             <a href="{{url_for('inventorydelete',index=indexx)}}" class = "info__secondbutton">Remove Tracking</a>
@@ -42,12 +44,12 @@
       </div>
 
       <div class="pred__title">Price Prediction</div>
-
+      {% if predicted_price != -69 %}
       <div class="pred">
         <div class="pred__entry">
           <div class="pred__title">Tomorrow</div>
           <div class="pred__line"></div>
-          <div class="pred__price">5 morbillion dollars</div>
+          <div class="pred__price">Rp {{predicted_price}}</div>
           <div class="pred__note">Accuracy Rate<br />95%</div>
         </div>
         <div class="pred__entry">
@@ -63,6 +65,11 @@
           <div class="pred__note">Accuracy Rate<br />95%</div>
         </div>
       </div>
+      {% else %}
+      <div class="pred__entry">
+          <div class="pred__title">Need more data to predict, please wait for a few more days</div>
+      </div>
+      {% endif %}
     </div>
   </form>
 </div>

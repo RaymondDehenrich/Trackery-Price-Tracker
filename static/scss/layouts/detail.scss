@@ -69,6 +69,8 @@
 
     &__box{
         flex-grow: 1;
+		min-width: 15em;
+		flex-basis: 0;
         @include child_margin_vert(1em, true);
     }
 

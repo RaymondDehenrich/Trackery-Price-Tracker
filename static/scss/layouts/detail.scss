@@ -60,14 +60,15 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+	gap: 1em;
 
     &__img{
-        width: 40%;
+		width: 40%;
         min-width: 100px;
     }
 
     &__box{
-        width: 60%;
+        flex-grow: 1;
         @include child_margin_vert(1em, true);
     }
 

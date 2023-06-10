@@ -76,7 +76,7 @@ def lin_reg(data):
     plt.title('Last 7 day price')
     plt.xlabel('Date')
     plt.ylabel('Price')
-    plt.plot(df['Date'][3:], df['Price'][3:],marker = ".")
+    plt.plot(df['Date'][-7:], df['Price'][-7:],marker = ".")
     plt.savefig('static/images/plot.png')
 
     return predicted_price

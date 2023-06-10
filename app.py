@@ -171,7 +171,6 @@ def search():
     client_dict.clear()
     client_dict_lazada.clear()
     recompile_sass()
-    page_name = "search"
     abc = request.values.get('query')
     #hmm, harusnya gini gpp untuk check kalo login atau ga supaya ga crash. blm di full test.
     if 'email' in session:
@@ -190,9 +189,9 @@ def search():
     add_to_client_lazada(lazada)
 
     tokopedia_price= [float(item["price"][2:].replace(".", "")) for item in tokopedia]
-    tokopedia_avg = round(sum(tokopedia_price)/len(tokopedia_price),5) if abc else 0
+    tokopedia_avg = round(sum(tokopedia_price)/len(tokopedia_price),5) if len(lazada_price) else 0
     lazada_price= [float(item["price"][2:].replace(".", "")) for item in lazada]
-    lazada_avg = round(sum(lazada_price)/len(lazada_price),5) if abc else 0
+    lazada_avg = round(sum(lazada_price)/len(lazada_price),5) if len(lazada_price) else 0
     return render_template("search.html", tokopedia=tokopedia, query = abc, lazada=lazada,tokopedia_avg=tokopedia_avg,lazada_avg=lazada_avg)
 
 @app.route('/search?query=<query>/<int:index>')
@@ -211,7 +210,7 @@ def searchindex(query, index):
     add_to_client(tokopedia)
     lazada = searchLazada(query) if query else dict()
     add_to_client_lazada(lazada)
-    
+
     tokopedia_price= [float(item["price"][2:].replace(".", "")) for item in tokopedia]
     tokopedia_avg = round(sum(tokopedia_price)/len(tokopedia_price),5) if query else 0
     lazada_price= [float(item["price"][2:].replace(".", "")) for item in lazada]

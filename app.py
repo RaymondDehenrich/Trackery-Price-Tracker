@@ -189,7 +189,7 @@ def search():
     add_to_client_lazada(lazada)
 
     tokopedia_price= [float(item["price"][2:].replace(".", "")) for item in tokopedia]
-    tokopedia_avg = round(sum(tokopedia_price)/len(tokopedia_price),5) if len(lazada_price) else 0
+    tokopedia_avg = round(sum(tokopedia_price)/len(tokopedia_price),5) if len(tokopedia_price) else 0
     lazada_price= [float(item["price"][2:].replace(".", "")) for item in lazada]
     lazada_avg = round(sum(lazada_price)/len(lazada_price),5) if len(lazada_price) else 0
     return render_template("search.html", tokopedia=tokopedia, query = abc, lazada=lazada,tokopedia_avg=tokopedia_avg,lazada_avg=lazada_avg)
